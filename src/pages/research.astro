@@ -1,0 +1,498 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const researchAreas = [
+  {
+    number: '01',
+    category: 'GENOMICS',
+    title: 'Genomics & Variant Analysis',
+    description:
+      'Exploring genomic variation, genetic mutations and molecular signatures to understand biological systems and disease mechanisms.',
+    technologies: ['WGS', 'Variant calling', 'BCFtools', 'GATK'],
+    icon: '⌬',
+    accent: 'teal'
+  },
+  {
+    number: '02',
+    category: 'TRANSCRIPTOMICS',
+    title: 'Transcriptomics & Gene Expression',
+    description:
+      'Investigating gene expression patterns, regulatory networks and molecular pathways using bulk and single-cell transcriptomic data.',
+    technologies: ['RNA-seq', 'DESeq2', 'Seurat', 'Scanpy'],
+    icon: '⌁',
+    accent: 'blue'
+  },
+  {
+    number: '03',
+    category: 'ANTIMICROBIAL RESISTANCE',
+    title: 'AMR & Microbial Genomics',
+    description:
+      'Studying antimicrobial resistance, virulence determinants and microbial evolution through genomic and computational approaches.',
+    technologies: ['WGS', 'AMRFinderPlus', 'ABRicate', 'ML'],
+    icon: '◎',
+    accent: 'purple'
+  },
+  {
+    number: '04',
+    category: 'SINGLE-CELL BIOLOGY',
+    title: 'Single-Cell Genomics',
+    description:
+      'Understanding cellular heterogeneity, cell populations and biological states through high-resolution single-cell analysis.',
+    technologies: ['scRNA-seq', 'Scanpy', 'Seurat', 'Cell clustering'],
+    icon: '◉',
+    accent: 'orange'
+  },
+  {
+    number: '05',
+    category: 'COMPUTATIONAL DRUG DISCOVERY',
+    title: 'Molecular Modelling & Drug Discovery',
+    description:
+      'Applying computational approaches to investigate protein–ligand interactions, molecular properties and potential therapeutic candidates.',
+    technologies: ['Molecular docking', 'Molecular dynamics', '3D-QSAR', 'Desmond'],
+    icon: '⌘',
+    accent: 'pink'
+  },
+  {
+    number: '06',
+    category: 'ARTIFICIAL INTELLIGENCE',
+    title: 'AI & Machine Learning in Biology',
+    description:
+      'Developing data-driven approaches for biological prediction, classification, biomarker discovery and interpretation of complex datasets.',
+    technologies: ['Python', 'R', 'Random Forest', 'Deep Learning'],
+    icon: '✳',
+    accent: 'green'
+  }
+];
+
+const researchPrinciples = [
+  {
+    number: '01',
+    title: 'Reproducibility first',
+    description: 'Transparent workflows, version-controlled code and documented analytical decisions.'
+  },
+  {
+    number: '02',
+    title: 'Open science',
+    description: 'Encouraging accessible methods, shared resources and collaboration across disciplines.'
+  },
+  {
+    number: '03',
+    title: 'Biology-driven computation',
+    description: 'Using computational methods to address meaningful biological and biomedical questions.'
+  }
+];
+---
+
+<MainLayout
+  title="Research | Bioxflow"
+  description="Explore Bioxflow research interests in genomics, transcriptomics, antimicrobial resistance, single-cell biology, computational drug discovery and AI in biology."
+>
+  <Navbar />
+
+  <main class="bg-white text-[#172638]">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[#101c2c] text-white">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute -right-32 -top-40 h-[550px] w-[550px] rounded-full border border-teal-400/30"></div>
+        <div class="absolute -right-16 -top-24 h-[420px] w-[420px] rounded-full border border-teal-400/30"></div>
+        <div class="absolute right-10 top-10 h-[260px] w-[260px] rounded-full border border-teal-400/30"></div>
+        <div class="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-teal-500/10 blur-[100px]"></div>
+      </div>
+
+      <div class="relative mx-auto grid max-w-7xl gap-14 px-6 py-28 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-36">
+
+        <div>
+          <div class="mb-7 flex items-center gap-3">
+            <span class="h-px w-10 bg-[#18b6a4]"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+              Research & Discovery
+            </span>
+          </div>
+
+          <h1 class="max-w-4xl font-['Space_Grotesk'] text-5xl font-semibold leading-[1.12] tracking-tight md:text-6xl lg:text-7xl">
+            Exploring biology through
+            <span class="text-[#18b6a4]">computation.</span>
+          </h1>
+
+          <p class="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
+            We bring together bioinformatics, computational biology and artificial
+            intelligence to explore complex biological questions and make
+            scientific data more meaningful.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#research-areas"
+              class="rounded-lg bg-[#18b6a4] px-7 py-4 text-sm font-bold text-[#101c2c] transition hover:bg-white">
+              Explore research areas <span class="ml-2">↓</span>
+            </a>
+
+            <a href="/contact"
+              class="rounded-lg border border-white/25 px-7 py-4 text-sm font-semibold text-white transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+              Collaborate with us
+            </a>
+          </div>
+        </div>
+
+        <!-- SCIENTIFIC VISUAL -->
+        <div class="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center">
+          <div class="absolute inset-5 rounded-full border border-teal-400/20"></div>
+          <div class="absolute inset-12 rounded-full border border-teal-400/30"></div>
+          <div class="absolute inset-20 rounded-full border border-teal-400/20"></div>
+
+          <div class="absolute h-64 w-64 animate-[spin_35s_linear_infinite] rounded-full border border-dashed border-teal-400/40"></div>
+
+          <div class="absolute left-10 top-20 h-3 w-3 rounded-full bg-[#18b6a4] shadow-[0_0_25px_#18b6a4]"></div>
+          <div class="absolute right-12 top-32 h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_20px_#60a5fa]"></div>
+          <div class="absolute bottom-20 right-16 h-3 w-3 rounded-full bg-purple-400 shadow-[0_0_20px_#c084fc]"></div>
+
+          <div class="relative z-10 flex h-44 w-44 items-center justify-center rounded-full border border-teal-400/40 bg-[#173b4a]/80 shadow-[0_0_80px_rgba(24,182,164,0.18)] backdrop-blur">
+            <div class="text-center">
+              <div class="text-6xl text-[#18b6a4]">⌬</div>
+              <div class="mt-2 text-xs font-bold uppercase tracking-[0.3em] text-white">
+                BIOXFLOW
+              </div>
+              <div class="mt-1 text-[10px] tracking-widest text-slate-400">
+                SCIENCE × COMPUTATION
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute left-0 top-1/2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-teal-300 backdrop-blur">
+            Genomics
+          </div>
+          <div class="absolute right-0 top-1/3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-blue-300 backdrop-blur">
+            AI / ML
+          </div>
+          <div class="absolute bottom-8 left-1/3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-purple-300 backdrop-blur">
+            Bioinformatics
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="mx-auto max-w-7xl px-6 py-24">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Our research vision
+          </p>
+
+          <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight text-[#101c2c] md:text-5xl">
+            Connecting biological questions with computational solutions.
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-lg leading-8 text-slate-600">
+            Modern biological research generates enormous volumes of data.
+            Turning these datasets into reliable scientific insight requires
+            robust analytical methods, reproducible workflows and a strong
+            understanding of biology.
+          </p>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Bioxflow aims to bring these elements together through computational
+            research, open-source tools and collaborative scientific development.
+            Our research interests span genomics, infectious disease, molecular
+            biology and emerging AI-driven approaches.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESEARCH AREAS -->
+    <section id="research-areas" class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Research domains
+          </p>
+
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            Areas we are exploring.
+          </h2>
+
+          <p class="mt-6 leading-8 text-slate-600">
+            Our research interests combine established bioinformatics methods
+            with emerging computational approaches to investigate biological
+            systems at different scales.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {researchAreas.map((area) => (
+            <article class="group rounded-2xl border border-slate-200 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-[#18b6a4] hover:shadow-xl hover:shadow-slate-200/60">
+
+              <div class="flex items-start justify-between">
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#e7f7f5] text-3xl text-[#159d90]">
+                  {area.icon}
+                </div>
+                <span class="font-mono text-sm text-slate-300">{area.number}</span>
+              </div>
+
+              <p class="mt-8 text-[10px] font-bold tracking-[0.2em] text-[#159d90]">
+                {area.category}
+              </p>
+
+              <h3 class="mt-3 font-['Space_Grotesk'] text-2xl font-semibold text-[#101c2c]">
+                {area.title}
+              </h3>
+
+              <p class="mt-4 min-h-28 text-sm leading-7 text-slate-600">
+                {area.description}
+              </p>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                {area.technologies.map((technology) => (
+                  <span class="rounded-md bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600">
+                    {technology}
+                  </span>
+                ))}
+              </div>
+
+              <div class="mt-8 h-px bg-slate-100 transition group-hover:bg-[#18b6a4]"></div>
+
+              <div class="mt-5 flex items-center justify-between text-sm font-semibold text-[#101c2c]">
+                <span>Research domain</span>
+                <span class="text-lg text-[#18b6a4]">↗</span>
+              </div>
+
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESEARCH IN ACTION -->
+    <section class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="grid gap-16 lg:grid-cols-2 lg:items-center">
+
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+              From data to discovery
+            </p>
+
+            <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight text-[#101c2c] md:text-5xl">
+              Building a bridge between data and biology.
+            </h2>
+
+            <p class="mt-6 leading-8 text-slate-600">
+              We are interested in developing analytical strategies that
+              transform raw biological data into interpretable results.
+              From sequencing reads to molecular networks, each stage of
+              analysis should be transparent, reliable and reproducible.
+            </p>
+
+            <a href="/pipelines" class="mt-8 inline-flex items-center gap-3 font-bold text-[#159d90] hover:text-[#101c2c]">
+              Explore our pipeline concepts <span>→</span>
+            </a>
+          </div>
+
+          <div class="rounded-3xl bg-[#101c2c] p-8 text-white md:p-10">
+
+            <div class="mb-8 flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#18b6a4]">
+                Computational workflow
+              </span>
+              <span class="rounded-full border border-teal-400/30 px-3 py-1 text-[10px] text-teal-300">
+                CONCEPT
+              </span>
+            </div>
+
+            <div class="space-y-3">
+
+              <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+                <div class="flex items-center gap-4">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-400/10 text-xl text-[#18b6a4]">01</span>
+                  <div>
+                    <p class="font-semibold">Biological data</p>
+                    <p class="mt-1 text-xs text-slate-400">FASTQ · FASTA · Expression matrices</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pl-9 text-xl text-[#18b6a4]">↓</div>
+
+              <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+                <div class="flex items-center gap-4">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-400/10 text-xl text-[#18b6a4]">02</span>
+                  <div>
+                    <p class="font-semibold">Quality control & processing</p>
+                    <p class="mt-1 text-xs text-slate-400">Quality assessment · Filtering · Alignment</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pl-9 text-xl text-[#18b6a4]">↓</div>
+
+              <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+                <div class="flex items-center gap-4">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-400/10 text-xl text-[#18b6a4]">03</span>
+                  <div>
+                    <p class="font-semibold">Computational analysis</p>
+                    <p class="mt-1 text-xs text-slate-400">Statistics · Genomics · Machine learning</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pl-9 text-xl text-[#18b6a4]">↓</div>
+
+              <div class="rounded-xl border border-teal-400/30 bg-teal-400/10 p-5">
+                <div class="flex items-center gap-4">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#18b6a4] text-xl text-[#101c2c]">04</span>
+                  <div>
+                    <p class="font-semibold text-[#18b6a4]">Biological interpretation</p>
+                    <p class="mt-1 text-xs text-slate-300">Visualisation · Reporting · Discovery</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH PRINCIPLES -->
+    <section class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-2xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            How we approach science
+          </p>
+
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            Research built on strong foundations.
+          </h2>
+        </div>
+
+        <div class="mt-14 grid gap-10 md:grid-cols-3">
+          {researchPrinciples.map((principle) => (
+            <div class="border-t-2 border-[#18b6a4] pt-7">
+              <span class="font-mono text-sm text-[#18b6a4]">{principle.number}</span>
+              <h3 class="mt-5 font-['Space_Grotesk'] text-2xl font-semibold text-[#101c2c]">
+                {principle.title}
+              </h3>
+              <p class="mt-4 leading-7 text-slate-600">
+                {principle.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OPEN RESEARCH -->
+    <section class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+              Knowledge & resources
+            </p>
+
+            <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+              Making research more accessible.
+            </h2>
+
+            <p class="mt-6 leading-8 text-slate-600">
+              We aim to support the scientific community through accessible
+              computational resources, transparent research methods and
+              educational material.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+
+            <div class="rounded-2xl border border-slate-200 p-7 transition hover:border-[#18b6a4]">
+              <div class="text-3xl text-[#18b6a4]">⌘</div>
+              <h3 class="mt-5 text-xl font-bold text-[#101c2c]">Open-source tools</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Reusable computational workflows, scripts and analytical resources.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 p-7 transition hover:border-[#18b6a4]">
+              <div class="text-3xl text-[#18b6a4]">▤</div>
+              <h3 class="mt-5 text-xl font-bold text-[#101c2c]">Research publications</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                A space to share scientific outputs, methods and research insights as they become available.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 p-7 transition hover:border-[#18b6a4]">
+              <div class="text-3xl text-[#18b6a4]">⌕</div>
+              <h3 class="mt-5 text-xl font-bold text-[#101c2c]">Public datasets</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Exploring publicly available biological datasets for reproducible research.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 p-7 transition hover:border-[#18b6a4]">
+              <div class="text-3xl text-[#18b6a4]">✳</div>
+              <h3 class="mt-5 text-xl font-bold text-[#101c2c]">Scientific education</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Learning resources to make bioinformatics and computational biology more approachable.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLABORATION CTA -->
+    <section class="bg-[#101c2c] px-6 py-24 text-white">
+      <div class="mx-auto max-w-5xl text-center">
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#18b6a4]/10 text-3xl text-[#18b6a4]">
+          ✳
+        </div>
+
+        <p class="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+          Let's work together
+        </p>
+
+        <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight md:text-6xl">
+          Better science begins with collaboration.
+        </h2>
+
+        <p class="mx-auto mt-7 max-w-2xl leading-8 text-slate-300">
+          Are you a researcher, student, developer or computational biologist?
+          We welcome conversations around scientific ideas, open-source
+          development and collaborative research.
+        </p>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a href="/contact"
+            class="rounded-lg bg-[#18b6a4] px-8 py-4 font-bold text-[#101c2c] transition hover:bg-white">
+            Start a conversation →
+          </a>
+
+          <a href="/community"
+            class="rounded-lg border border-white/20 px-8 py-4 font-semibold transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+            Join the community
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</MainLayout>

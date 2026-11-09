@@ -1,0 +1,703 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const contributionAreas = [
+  {
+    id: 'pipelines',
+    number: '01',
+    icon: '⌘',
+    category: 'Workflow development',
+    title: 'Build bioinformatics pipelines',
+    description: 'Develop, optimise and maintain reproducible workflows for genomic, transcriptomic and other biological data.',
+    skills: ['Nextflow', 'Snakemake', 'Python', 'R'],
+    level: 'Intermediate'
+  },
+  {
+    id: 'research',
+    number: '02',
+    icon: '⌬',
+    category: 'Scientific research',
+    title: 'Contribute to research projects',
+    description: 'Explore biological datasets, develop computational methods and investigate questions across biomedical research.',
+    skills: ['Genomics', 'RNA-seq', 'AMR', 'Statistics'],
+    level: 'All levels'
+  },
+  {
+    id: 'documentation',
+    number: '03',
+    icon: '▤',
+    category: 'Documentation',
+    title: 'Improve scientific documentation',
+    description: 'Write practical guides, explain methods, improve installation instructions and make workflows easier to understand.',
+    skills: ['Markdown', 'Technical writing', 'Bioinformatics'],
+    level: 'Beginner friendly'
+  },
+  {
+    id: 'testing',
+    number: '04',
+    icon: '✓',
+    category: 'Testing & validation',
+    title: 'Test and validate workflows',
+    description: 'Run workflows with suitable test data, identify bugs, report unexpected results and improve reliability.',
+    skills: ['Quality control', 'Testing', 'Linux', 'Git'],
+    level: 'All levels'
+  },
+  {
+    id: 'education',
+    number: '05',
+    icon: '✳',
+    category: 'Education',
+    title: 'Create learning resources',
+    description: 'Develop tutorials, practical exercises and learning material for people entering computational biology.',
+    skills: ['Teaching', 'R', 'Python', 'Scientific communication'],
+    level: 'Beginner friendly'
+  },
+  {
+    id: 'design',
+    number: '06',
+    icon: '◈',
+    category: 'Community & design',
+    title: 'Improve the Bioxflow experience',
+    description: 'Help improve website usability, scientific visualisation, accessibility and the overall community experience.',
+    skills: ['Web development', 'UI/UX', 'Accessibility'],
+    level: 'All levels'
+  }
+];
+
+const guidelines = [
+  {
+    number: '01',
+    title: 'Start with an issue',
+    description: 'Before making substantial changes, discuss your idea or report a bug so that the work can be coordinated.'
+  },
+  {
+    number: '02',
+    title: 'Create a focused branch',
+    description: 'Keep each contribution focused on one feature, fix or improvement. Use a descriptive branch name.'
+  },
+  {
+    number: '03',
+    title: 'Document your changes',
+    description: 'Explain what you changed, why it matters and how someone else can reproduce or test it.'
+  },
+  {
+    number: '04',
+    title: 'Submit a pull request',
+    description: 'Describe your changes clearly and include relevant test results, screenshots or example outputs.'
+  }
+];
+
+const categories = [
+  {id: 'all', label: 'All contributions'},
+  {id: 'pipelines', label: 'Pipelines'},
+  {id: 'research', label: 'Research'},
+  {id: 'documentation', label: 'Documentation'},
+  {id: 'testing', label: 'Testing'},
+  {id: 'education', label: 'Education'},
+  {id: 'design', label: 'Design'}
+];
+---
+
+<MainLayout
+  title="Contribute | Bioxflow"
+  description="Contribute to Bioxflow open-source bioinformatics projects, scientific workflows, research resources and computational biology education."
+>
+  <Navbar />
+
+  <main class="bg-white text-[#172638]">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[#101c2c] text-white">
+
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full border border-teal-400/15"></div>
+        <div class="absolute -right-16 -top-16 h-[360px] w-[360px] rounded-full border border-teal-400/20"></div>
+        <div class="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-teal-500/10 blur-[100px]"></div>
+      </div>
+
+      <div class="relative mx-auto grid max-w-7xl gap-16 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-32">
+
+        <div>
+          <div class="mb-7 flex items-center gap-3">
+            <span class="h-px w-10 bg-[#18b6a4]"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+              Open science starts with you
+            </span>
+          </div>
+
+          <h1 class="max-w-3xl font-['Space_Grotesk'] text-5xl font-semibold leading-[1.12] tracking-tight md:text-6xl lg:text-7xl">
+            Don't just use science.
+            <span class="text-[#18b6a4]">Help build it.</span>
+          </h1>
+
+          <p class="mt-8 max-w-xl text-lg leading-8 text-slate-300">
+            Contribute to open-source bioinformatics, develop reproducible
+            workflows, improve scientific resources and collaborate with
+            people who share an interest in computational biology.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#contribution-opportunities"
+              class="rounded-lg bg-[#18b6a4] px-7 py-4 text-sm font-bold text-[#101c2c] transition hover:bg-white">
+              Explore opportunities →
+            </a>
+
+            <a href="#how-to-contribute"
+              class="rounded-lg border border-white/25 px-7 py-4 text-sm font-semibold transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+              How to contribute
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap gap-7 text-xs text-slate-400">
+            <span>⌘ Open-source</span>
+            <span>⌬ Reproducible science</span>
+            <span>✳ Collaborative development</span>
+          </div>
+        </div>
+
+        <!-- GIT CONTRIBUTION VISUAL -->
+        <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur md:p-8">
+
+          <div class="flex items-center justify-between border-b border-white/10 pb-5">
+            <div>
+              <p class="text-sm font-semibold">Your contribution journey</p>
+              <p class="mt-1 text-xs text-slate-400">A collaborative development workflow</p>
+            </div>
+            <span class="rounded-full bg-teal-400/10 px-3 py-1 text-[10px] font-bold text-teal-300">
+              OPEN SOURCE
+            </span>
+          </div>
+
+          <div class="mt-7 space-y-5">
+
+            <div class="flex items-center gap-4">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-400/10 text-xl text-teal-300">⌕</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">Explore a project</p>
+                <p class="mt-1 text-xs text-slate-400">Find a workflow or research resource</p>
+              </div>
+              <span class="text-xs text-slate-500">01</span>
+            </div>
+
+            <div class="ml-5 h-5 border-l border-dashed border-teal-400/40"></div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-400/10 text-xl text-blue-300">⌘</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">Fork & develop</p>
+                <p class="mt-1 text-xs text-slate-400">Work on your own branch</p>
+              </div>
+              <span class="text-xs text-slate-500">02</span>
+            </div>
+
+            <div class="ml-5 h-5 border-l border-dashed border-teal-400/40"></div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-400/10 text-xl text-purple-300">✓</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">Test & document</p>
+                <p class="mt-1 text-xs text-slate-400">Check your changes and results</p>
+              </div>
+              <span class="text-xs text-slate-500">03</span>
+            </div>
+
+            <div class="ml-5 h-5 border-l border-dashed border-teal-400/40"></div>
+
+            <div class="flex items-center gap-4 rounded-xl border border-teal-400/20 bg-teal-400/10 p-4">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-400 text-xl text-[#101c2c]">↗</div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-teal-300">Submit a pull request</p>
+                <p class="mt-1 text-xs text-slate-300">Share your contribution</p>
+              </div>
+              <span class="text-xs text-teal-300">04</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="mx-auto max-w-7xl px-6 py-24">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Everyone can contribute
+          </p>
+          <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight text-[#101c2c] md:text-5xl">
+            Great scientific tools are built together.
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-lg leading-8 text-slate-600">
+            Open-source scientific development depends on more than programming.
+            Researchers provide biological insight, developers build tools,
+            students bring fresh perspectives and contributors help make
+            scientific resources more accessible.
+          </p>
+          <p class="mt-5 leading-8 text-slate-600">
+            Whether you are writing your first documentation page or developing
+            a complex analysis workflow, there are meaningful ways to participate.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTRIBUTION OPPORTUNITIES -->
+    <section id="contribution-opportunities" class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Ways to contribute
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            Find where your skills make a difference.
+          </h2>
+          <p class="mt-6 leading-8 text-slate-600">
+            Explore different contribution areas. You can start with what you
+            already know and gradually develop new skills.
+          </p>
+        </div>
+
+        <!-- INTERACTIVE FILTERS -->
+        <div class="mt-10 flex flex-wrap gap-3" id="category-filters">
+          {categories.map((category) => (
+            <button
+              type="button"
+              data-filter={category.id}
+              aria-pressed={category.id === 'all' ? 'true' : 'false'}
+              class:list={[
+                'contribution-filter rounded-full border px-5 py-3 text-sm font-semibold transition',
+                category.id === 'all'
+                  ? 'border-[#101c2c] bg-[#101c2c] text-white'
+                  : 'border-slate-300 bg-white text-slate-600 hover:border-[#18b6a4]'
+              ]}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+
+        <!-- CONTRIBUTION CARDS -->
+        <div id="contribution-grid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+          {contributionAreas.map((area) => (
+            <article data-category={area.id} class="contribution-card flex flex-col rounded-2xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-[#18b6a4] hover:shadow-xl hover:shadow-slate-200/60">
+
+              <div class="flex items-start justify-between">
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#e7f7f5] text-3xl text-[#159d90]">
+                  {area.icon}
+                </div>
+                <span class="font-mono text-sm text-slate-300">{area.number}</span>
+              </div>
+
+              <p class="mt-7 text-[10px] font-bold uppercase tracking-[0.2em] text-[#159d90]">
+                {area.category}
+              </p>
+
+              <h3 class="mt-3 font-['Space_Grotesk'] text-2xl font-semibold text-[#101c2c]">
+                {area.title}
+              </h3>
+
+              <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">
+                {area.description}
+              </p>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                {area.skills.map((skill) => (
+                  <span class="rounded-md bg-slate-100 px-3 py-1.5 text-xs text-slate-600">{skill}</span>
+                ))}
+              </div>
+
+              <div class="mt-7 flex items-center justify-between border-t border-slate-100 pt-5">
+                <span class="text-xs font-medium text-slate-500">{area.level}</span>
+                <a href="/contact?interest=contribution" class="text-sm font-bold text-[#159d90] hover:text-[#101c2c]">
+                  Get involved →
+                </a>
+              </div>
+
+            </article>
+          ))}
+
+        </div>
+
+        <p id="result-count" aria-live="polite" class="mt-7 text-sm text-slate-500">
+          Showing all 6 contribution areas.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- GIT WORKFLOW EXPLAINER -->
+    <section id="how-to-contribute" class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Getting started with GitHub
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            From your computer to the community.
+          </h2>
+          <p class="mt-6 leading-8 text-slate-600">
+            The following is a typical open-source workflow. Explore each
+            step to understand how contributions move from an idea to a
+            proposed improvement.
+          </p>
+        </div>
+
+        <!-- INTERACTIVE STEPPER -->
+        <div class="mt-14 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+
+          <div class="space-y-3" id="workflow-steps">
+
+            <button type="button" data-step="0" aria-pressed="true" class="workflow-step flex w-full items-center gap-4 rounded-xl border border-teal-400 bg-[#e7f7f5] p-5 text-left transition">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#18b6a4] font-mono font-bold text-[#101c2c]">01</span>
+              <span>
+                <span class="block font-bold text-[#101c2c]">Fork a repository</span>
+                <span class="mt-1 block text-xs text-slate-500">Create your own copy</span>
+              </span>
+            </button>
+
+            <button type="button" data-step="1" aria-pressed="false" class="workflow-step flex w-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left transition hover:border-[#18b6a4]">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 font-mono font-bold text-slate-600">02</span>
+              <span>
+                <span class="block font-bold text-[#101c2c]">Clone your fork</span>
+                <span class="mt-1 block text-xs text-slate-500">Work locally on your machine</span>
+              </span>
+            </button>
+
+            <button type="button" data-step="2" aria-pressed="false" class="workflow-step flex w-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left transition hover:border-[#18b6a4]">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 font-mono font-bold text-slate-600">03</span>
+              <span>
+                <span class="block font-bold text-[#101c2c]">Create a branch</span>
+                <span class="mt-1 block text-xs text-slate-500">Keep your changes organised</span>
+              </span>
+            </button>
+
+            <button type="button" data-step="3" aria-pressed="false" class="workflow-step flex w-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left transition hover:border-[#18b6a4]">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 font-mono font-bold text-slate-600">04</span>
+              <span>
+                <span class="block font-bold text-[#101c2c]">Commit & push</span>
+                <span class="mt-1 block text-xs text-slate-500">Save and upload your changes</span>
+              </span>
+            </button>
+
+            <button type="button" data-step="4" aria-pressed="false" class="workflow-step flex w-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left transition hover:border-[#18b6a4]">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 font-mono font-bold text-slate-600">05</span>
+              <span>
+                <span class="block font-bold text-[#101c2c]">Open a pull request</span>
+                <span class="mt-1 block text-xs text-slate-500">Propose your contribution</span>
+              </span>
+            </button>
+
+          </div>
+
+          <!-- STEP DETAILS -->
+          <div class="flex min-h-[440px] flex-col rounded-3xl bg-[#101c2c] p-8 text-white md:p-10">
+
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#18b6a4]">
+                Contribution walkthrough
+              </span>
+              <span id="step-counter" class="font-mono text-sm text-slate-400">STEP 01 / 05</span>
+            </div>
+
+            <h3 id="step-title" class="mt-10 font-['Space_Grotesk'] text-3xl font-semibold">
+              Fork a repository
+            </h3>
+
+            <p id="step-description" class="mt-5 max-w-xl leading-8 text-slate-300">
+              Visit a GitHub repository and create a fork. This gives you your
+              own copy where you can safely make changes without modifying the
+              original project.
+            </p>
+
+            <div class="mt-8 rounded-xl border border-white/10 bg-black/20 p-5">
+              <p class="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Example command</p>
+              <pre class="overflow-x-auto whitespace-pre-wrap text-sm leading-7 text-teal-300"><code id="step-command"># Fork the repository using GitHub's Fork button</code></pre>
+            </div>
+
+            <div class="mt-auto flex items-center justify-between pt-8">
+              <span class="text-xs text-slate-400">Select a step to explore</span>
+              <div class="flex gap-3">
+                <button type="button" id="previous-step" disabled class="rounded-lg border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-teal-400 disabled:cursor-not-allowed disabled:opacity-30">
+                  ← Previous
+                </button>
+                <button type="button" id="next-step" class="rounded-lg bg-[#18b6a4] px-4 py-3 text-sm font-bold text-[#101c2c] transition hover:bg-white">
+                  Next →
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTRIBUTION GUIDELINES -->
+    <section class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Contribution guidelines
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            Good contributions make good science.
+          </h2>
+          <p class="mt-6 leading-8 text-slate-600">
+            We aim to make contributions transparent, understandable and
+            maintainable. These principles provide a starting point for
+            participating in Bioxflow projects.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-2">
+          {guidelines.map((item) => (
+            <div class="flex gap-6 border-t border-slate-200 pt-7">
+              <span class="font-mono text-lg font-semibold text-[#18b6a4]">{item.number}</span>
+              <div>
+                <h3 class="font-['Space_Grotesk'] text-2xl font-semibold text-[#101c2c]">{item.title}</h3>
+                <p class="mt-3 leading-7 text-slate-600">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SCIENTIFIC CODE EXAMPLE -->
+    <section class="bg-white px-6 py-24">
+      <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2 lg:items-center">
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Built for reproducibility
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold leading-tight text-[#101c2c] md:text-5xl">
+            Every improvement can make research better.
+          </h2>
+          <p class="mt-6 leading-8 text-slate-600">
+            Bioinformatics workflows need clear inputs, defined software
+            environments, documented parameters and reliable outputs.
+            Contributors can help improve each of these components.
+          </p>
+          <a href="/pipelines" class="mt-8 inline-flex items-center gap-3 font-bold text-[#159d90] hover:text-[#101c2c]">
+            Explore pipeline concepts →
+          </a>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl bg-[#101c2c] shadow-2xl">
+          <div class="flex items-center justify-between border-b border-white/10 px-6 py-4">
+            <div class="flex items-center gap-2">
+              <span class="h-3 w-3 rounded-full bg-red-400"></span>
+              <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+              <span class="h-3 w-3 rounded-full bg-green-400"></span>
+            </div>
+            <span class="text-xs text-slate-400">example_workflow.nf</span>
+          </div>
+
+         
+<pre class="overflow-x-auto p-6 text-sm leading-8 text-slate-300"><code><span class="text-purple-300">nextflow</span>.enable.dsl = 2
+
+<span class="text-purple-300">params</span>.input = 'data/*.fastq.gz'
+
+<span class="text-slate-500">// Example workflow structure</span>
+
+<span class="text-purple-300">process</span> FASTQC &#123;
+
+    input:
+    path reads
+
+    output:
+    path '*_fastqc.html'
+
+    script:
+    """
+    fastqc $&#123;reads&#125;
+    """
+&#125;
+
+<span class="text-purple-300">workflow</span> &#123;
+
+    reads = Channel.fromPath(params.input)
+
+    FASTQC(reads)
+&#125;</code></pre>
+
+
+          <div class="border-t border-white/10 px-6 py-4">
+            <p class="text-xs text-slate-400">
+              Illustrative Nextflow code — not a validated production workflow.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="bg-[#101c2c] px-6 py-24 text-white">
+      <div class="mx-auto max-w-5xl text-center">
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#18b6a4]/10 text-3xl text-[#18b6a4]">
+          ⌘
+        </div>
+
+        <p class="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+          Build with Bioxflow
+        </p>
+
+        <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight md:text-6xl">
+          Your next contribution could help someone discover something new.
+        </h2>
+
+        <p class="mx-auto mt-7 max-w-2xl leading-8 text-slate-300">
+          Have an idea, a scientific question or a useful skill to share?
+          We would love to hear from you.
+        </p>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a href="/contact?interest=contribution"
+            class="rounded-lg bg-[#18b6a4] px-8 py-4 font-bold text-[#101c2c] transition hover:bg-white">
+            Discuss a contribution →
+          </a>
+          <a href="/community"
+            class="rounded-lg border border-white/20 px-8 py-4 font-semibold transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+            Explore the community
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Contribution category filtering
+    const filterButtons = document.querySelectorAll('.contribution-filter');
+    const cards = document.querySelectorAll('.contribution-card');
+    const resultCount = document.querySelector('#result-count');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        let count = 0;
+
+        filterButtons.forEach((item) => {
+          const active = item === button;
+
+          item.setAttribute('aria-pressed', String(active));
+          item.classList.toggle('bg-[#101c2c]', active);
+          item.classList.toggle('text-white', active);
+          item.classList.toggle('border-[#101c2c]', active);
+          item.classList.toggle('bg-white', !active);
+          item.classList.toggle('text-slate-600', !active);
+          item.classList.toggle('border-slate-300', !active);
+        });
+
+        cards.forEach((card) => {
+          const visible = filter === 'all' || card.dataset.category === filter;
+          card.hidden = !visible;
+
+          if (visible) count++;
+        });
+
+        resultCount.textContent = filter === 'all'
+          ? `Showing all ${count} contribution areas.`
+          : `Showing ${count} contribution area${count === 1 ? '' : 's'} in this category.`;
+      });
+    });
+
+    // Interactive GitHub contribution walkthrough
+    const steps = [
+      {
+        title: 'Fork a repository',
+        description: "Visit a GitHub repository and create a fork. This gives you your own copy where you can safely make changes without modifying the original project.",
+        command: "Fork the repository using GitHub's Fork button"
+      },
+      {
+        title: 'Clone your fork',
+        description: 'Download your fork to your computer so that you can work on the code locally.',
+        command: 'git clone https://github.com/YOUR-USERNAME/REPOSITORY.git\\ncd REPOSITORY'
+      },
+      {
+        title: 'Create a branch',
+        description: 'Create a separate branch for your proposed improvement. This keeps your contribution organised.',
+        command: 'git checkout -b feature/my-improvement'
+      },
+      {
+        title: 'Commit & push',
+        description: 'Save your changes with a clear commit message and push the branch to your GitHub fork.',
+        command: 'git add .\\ngit commit -m "Improve workflow documentation"\\ngit push origin feature/my-improvement'
+      },
+      {
+        title: 'Open a pull request',
+        description: 'Open GitHub and propose merging your branch into the original repository. Describe what changed and how you tested it.',
+        command: '# Open a Pull Request on GitHub\\n# Include a summary and testing details'
+      }
+    ];
+
+    const stepButtons = document.querySelectorAll('.workflow-step');
+    const stepTitle = document.querySelector('#step-title');
+    const stepDescription = document.querySelector('#step-description');
+    const stepCommand = document.querySelector('#step-command');
+    const stepCounter = document.querySelector('#step-counter');
+    const previousButton = document.querySelector('#previous-step');
+    const nextButton = document.querySelector('#next-step');
+
+    let activeStep = 0;
+
+    function showStep(index) {
+      activeStep = Math.max(0, Math.min(index, steps.length - 1));
+
+      const step = steps[activeStep];
+
+      stepTitle.textContent = step.title;
+      stepDescription.textContent = step.description;
+      stepCommand.textContent = step.command;
+      stepCounter.textContent = `STEP ${String(activeStep + 1).padStart(2, '0')} / 05`;
+
+      stepButtons.forEach((button, i) => {
+        const active = i === activeStep;
+
+        button.setAttribute('aria-pressed', String(active));
+        button.classList.toggle('border-teal-400', active);
+        button.classList.toggle('bg-[#e7f7f5]', active);
+        button.classList.toggle('border-slate-200', !active);
+        button.classList.toggle('bg-white', !active);
+
+        const number = button.querySelector('span');
+        number.classList.toggle('bg-[#18b6a4]', active);
+        number.classList.toggle('text-[#101c2c]', active);
+        number.classList.toggle('bg-slate-100', !active);
+        number.classList.toggle('text-slate-600', !active);
+      });
+
+      previousButton.disabled = activeStep === 0;
+      nextButton.disabled = activeStep === steps.length - 1;
+      nextButton.textContent = activeStep === steps.length - 1 ? 'Completed' : 'Next →';
+    }
+
+    stepButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        showStep(Number(button.dataset.step));
+      });
+    });
+
+    previousButton.addEventListener('click', () => showStep(activeStep - 1));
+    nextButton.addEventListener('click', () => showStep(activeStep + 1));
+
+    showStep(0);
+  </script>
+
+</MainLayout>

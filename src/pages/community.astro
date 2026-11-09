@@ -1,0 +1,686 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const communityGroups = [
+  {
+    id: 'researchers',
+    name: 'Researchers',
+    short: 'Research',
+    icon: '⌬',
+    description: 'Connect with scientists exploring genomics, infectious diseases, transcriptomics, molecular biology and computational research.',
+    activities: ['Discuss research questions', 'Share analytical approaches', 'Explore collaborations']
+  },
+  {
+    id: 'developers',
+    name: 'Developers',
+    short: 'Developers',
+    icon: '</>',
+    description: 'Build useful scientific software, develop reproducible workflows and improve computational tools for biological research.',
+    activities: ['Develop pipelines', 'Improve documentation', 'Contribute code']
+  },
+  {
+    id: 'students',
+    name: 'Students & learners',
+    short: 'Students',
+    icon: '✳',
+    description: 'Learn bioinformatics, explore biological datasets and develop practical computational skills alongside the community.',
+    activities: ['Follow learning resources', 'Practise with datasets', 'Share learning experiences']
+  },
+  {
+    id: 'contributors',
+    name: 'Open-source contributors',
+    short: 'Contributors',
+    icon: '⌘',
+    description: 'Help make scientific resources more accessible through code, testing, documentation, tutorials and community support.',
+    activities: ['Review contributions', 'Test workflows', 'Create tutorials']
+  }
+];
+
+const contributionTypes = [
+  {
+    category: 'development',
+    label: 'Development',
+    number: '01',
+    title: 'Build bioinformatics pipelines',
+    description: 'Help create, test and improve reproducible workflows for genomic and transcriptomic analysis.',
+    tags: ['Nextflow', 'Snakemake', 'Python', 'R']
+  },
+  {
+    category: 'research',
+    label: 'Research',
+    number: '02',
+    title: 'Explore biological datasets',
+    description: 'Investigate public datasets, develop research ideas and share computational analyses.',
+    tags: ['Genomics', 'RNA-seq', 'AMR', 'Machine learning']
+  },
+  {
+    category: 'documentation',
+    label: 'Documentation',
+    number: '03',
+    title: 'Improve scientific documentation',
+    description: 'Write practical guides, explain analytical methods and make computational tools easier to use.',
+    tags: ['Tutorials', 'Markdown', 'Scientific writing']
+  },
+  {
+    category: 'education',
+    label: 'Education',
+    number: '04',
+    title: 'Share knowledge and tutorials',
+    description: 'Create learning resources and help newcomers understand bioinformatics concepts and tools.',
+    tags: ['Learning', 'Workshops', 'Teaching']
+  },
+  {
+    category: 'testing',
+    label: 'Testing',
+    number: '05',
+    title: 'Test and validate workflows',
+    description: 'Help identify bugs, check workflow outputs and improve the reliability of computational analysis.',
+    tags: ['Quality control', 'Testing', 'Reproducibility']
+  },
+  {
+    category: 'community',
+    label: 'Community',
+    number: '06',
+    title: 'Support scientific collaboration',
+    description: 'Connect people, suggest improvements and help build a welcoming scientific environment.',
+    tags: ['Networking', 'Discussion', 'Collaboration']
+  }
+];
+
+const principles = [
+  {
+    icon: '◈',
+    title: 'Open collaboration',
+    description: 'Encourage knowledge exchange and collaboration across scientific and technical disciplines.'
+  },
+  {
+    icon: '⌘',
+    title: 'Open-source development',
+    description: 'Build reusable tools and transparent workflows that others can inspect, improve and learn from.'
+  },
+  {
+    icon: '◎',
+    title: 'Inclusive learning',
+    description: 'Make computational biology more approachable for students, researchers and developers at different experience levels.'
+  },
+  {
+    icon: '✳',
+    title: 'Reproducible science',
+    description: 'Promote documented methods, transparent analysis and responsible use of biological data.'
+  }
+];
+---
+
+<MainLayout
+  title="Community | Bioxflow"
+  description="Join the Bioxflow bioinformatics community to connect, learn, collaborate and contribute to open-source computational biology."
+>
+  <Navbar />
+
+  <main class="overflow-hidden bg-white text-[#172638]">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-[#101c2c] text-white">
+
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute -right-40 -top-40 h-[550px] w-[550px] rounded-full border border-teal-400/10"></div>
+        <div class="absolute -right-20 -top-20 h-[400px] w-[400px] rounded-full border border-teal-400/15"></div>
+        <div class="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-teal-500/10 blur-[120px]"></div>
+      </div>
+
+      <div class="relative mx-auto grid max-w-7xl gap-14 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-32">
+
+        <div>
+          <div class="mb-7 flex items-center gap-3">
+            <span class="h-px w-10 bg-[#18b6a4]"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+              The Bioxflow Community
+            </span>
+          </div>
+
+          <h1 class="max-w-3xl font-['Space_Grotesk'] text-5xl font-semibold leading-[1.12] tracking-tight md:text-6xl lg:text-7xl">
+            Science moves forward
+            <span class="text-[#18b6a4]">together.</span>
+          </h1>
+
+          <p class="mt-8 max-w-xl text-lg leading-8 text-slate-300">
+            A growing space for researchers, bioinformaticians, developers and
+            students to exchange knowledge, build computational tools and
+            collaborate on meaningful scientific challenges.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#get-involved"
+              class="rounded-lg bg-[#18b6a4] px-7 py-4 text-sm font-bold text-[#101c2c] transition hover:bg-white">
+              Become a contributor →
+            </a>
+
+            <a href="#community-network"
+              class="rounded-lg border border-white/25 px-7 py-4 text-sm font-semibold text-white transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+              Explore the community
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-xs text-slate-400">
+            <span>✳ Open collaboration</span>
+            <span>⌘ Open-source science</span>
+            <span>◎ Shared learning</span>
+          </div>
+        </div>
+
+        <!-- HERO COMMUNITY VISUAL -->
+        <div class="relative mx-auto flex min-h-[400px] w-full max-w-lg items-center justify-center">
+
+          <div class="absolute h-[330px] w-[330px] rounded-full border border-dashed border-teal-400/20"></div>
+          <div class="absolute h-[250px] w-[250px] rounded-full border border-teal-400/20"></div>
+          <div class="absolute h-[170px] w-[170px] rounded-full border border-teal-400/30"></div>
+
+          <svg class="absolute inset-0 h-full w-full" viewBox="0 0 440 440" fill="none" aria-hidden="true">
+            <path d="M220 220 L220 55 M220 220 L385 220 M220 220 L220 385 M220 220 L55 220" stroke="#18b6a4" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="5 7"/>
+            <path d="M220 55 L385 220 L220 385 L55 220 Z" stroke="#18b6a4" stroke-opacity=".15"/>
+          </svg>
+
+          <div class="relative z-10 flex h-36 w-36 flex-col items-center justify-center rounded-full border border-teal-400/40 bg-[#173b4a] shadow-[0_0_70px_rgba(24,182,164,.2)]">
+            <span class="text-5xl text-[#18b6a4]">⌬</span>
+            <span class="mt-2 text-xs font-bold tracking-[0.2em]">BIOXFLOW</span>
+            <span class="mt-1 text-[9px] tracking-widest text-slate-400">COMMUNITY</span>
+          </div>
+
+          <div class="absolute left-1/2 top-0 -translate-x-1/2 rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center shadow-lg">
+            <div class="text-xl text-teal-300">⌬</div>
+            <div class="text-xs font-semibold">Researchers</div>
+          </div>
+
+          <div class="absolute right-0 top-1/2 -translate-y-1/2 rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center shadow-lg">
+            <div class="text-xl text-blue-300">&lt;/&gt;</div>
+            <div class="text-xs font-semibold">Developers</div>
+          </div>
+
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center shadow-lg">
+            <div class="text-xl text-purple-300">✳</div>
+            <div class="text-xs font-semibold">Students</div>
+          </div>
+
+          <div class="absolute left-0 top-1/2 -translate-y-1/2 rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center shadow-lg">
+            <div class="text-xl text-orange-300">⌘</div>
+            <div class="text-xs font-semibold">Contributors</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="mx-auto max-w-7xl px-6 py-24">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            More than a platform
+          </p>
+
+          <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight text-[#101c2c] md:text-5xl">
+            A shared space for computational biology.
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-lg leading-8 text-slate-600">
+            Biology is becoming increasingly data-driven. Researchers need
+            computational tools, developers need scientific context and
+            students need opportunities to learn through practical experience.
+          </p>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Bioxflow aims to connect these different perspectives. Our community
+            concept is built around sharing knowledge, developing useful
+            resources and making scientific collaboration more accessible.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE COMMUNITY NETWORK -->
+    <section id="community-network" class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Explore the ecosystem
+          </p>
+
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            One community. Different perspectives.
+          </h2>
+
+          <p class="mt-6 leading-8 text-slate-600">
+            Every contributor brings a different skill set. Select a group in
+            the network to explore how they can participate in Bioxflow.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+
+          <!-- INTERACTIVE NETWORK DIAGRAM -->
+          <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#101c2c] p-5 text-white sm:p-8">
+
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-teal-300">
+                Community network
+              </span>
+              <span class="rounded-full border border-white/10 px-3 py-1 text-[10px] text-slate-400">
+                INTERACTIVE
+              </span>
+            </div>
+
+            <div class="relative mx-auto mt-5 aspect-square w-full max-w-[480px]">
+
+              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 440 440" fill="none" aria-hidden="true">
+                <circle cx="220" cy="220" r="150" stroke="#18b6a4" stroke-opacity=".2" stroke-dasharray="4 8"/>
+                <circle cx="220" cy="220" r="85" stroke="#18b6a4" stroke-opacity=".2"/>
+                <path d="M220 220 L220 55 M220 220 L385 220 M220 220 L220 385 M220 220 L55 220" stroke="#18b6a4" stroke-opacity=".5" stroke-width="2"/>
+                <path d="M220 55 L385 220 L220 385 L55 220 Z" stroke="#18b6a4" stroke-opacity=".12"/>
+              </svg>
+
+              <div class="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-teal-400/50 bg-[#173b4a] shadow-[0_0_50px_rgba(24,182,164,.2)]">
+                <span class="text-4xl text-[#18b6a4]">⌬</span>
+                <span class="mt-1 text-[10px] font-bold tracking-widest">BIOXFLOW</span>
+              </div>
+
+              <button type="button" data-group="researchers" aria-pressed="true"
+                class="network-node absolute left-1/2 top-[5%] z-20 flex -translate-x-1/2 flex-col items-center rounded-xl border border-teal-400 bg-[#173b4a] px-4 py-3 text-center shadow-lg transition hover:scale-105">
+                <span class="text-2xl text-teal-300">⌬</span>
+                <span class="mt-1 text-xs font-semibold">Researchers</span>
+              </button>
+
+              <button type="button" data-group="developers" aria-pressed="false"
+                class="network-node absolute right-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center transition hover:scale-105">
+                <span class="text-2xl text-blue-300">&lt;/&gt;</span>
+                <span class="mt-1 text-xs font-semibold">Developers</span>
+              </button>
+
+              <button type="button" data-group="students" aria-pressed="false"
+                class="network-node absolute bottom-[5%] left-1/2 z-20 flex -translate-x-1/2 flex-col items-center rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center transition hover:scale-105">
+                <span class="text-2xl text-purple-300">✳</span>
+                <span class="mt-1 text-xs font-semibold">Students</span>
+              </button>
+
+              <button type="button" data-group="contributors" aria-pressed="false"
+                class="network-node absolute left-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center rounded-xl border border-white/10 bg-[#173b4a] px-4 py-3 text-center transition hover:scale-105">
+                <span class="text-2xl text-orange-300">⌘</span>
+                <span class="mt-1 text-xs font-semibold">Contributors</span>
+              </button>
+
+            </div>
+
+            <p class="mt-2 text-center text-xs text-slate-400">
+              Select any group to explore its role in the community.
+            </p>
+          </div>
+
+          <!-- DYNAMIC DETAIL PANEL -->
+          <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#159d90]">
+                Community profile
+              </span>
+              <span id="group-number" class="font-mono text-sm text-slate-300">01 / 04</span>
+            </div>
+
+            <div id="group-icon" class="mt-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#e7f7f5] text-3xl text-[#159d90]">
+              ⌬
+            </div>
+
+            <h3 id="group-title" class="mt-7 font-['Space_Grotesk'] text-3xl font-semibold text-[#101c2c]">
+              Researchers
+            </h3>
+
+            <p id="group-description" class="mt-5 min-h-24 leading-8 text-slate-600">
+              Connect with scientists exploring genomics, infectious diseases,
+              transcriptomics, molecular biology and computational research.
+            </p>
+
+            <div class="mt-8 border-t border-slate-100 pt-7">
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">
+                Ways to participate
+              </p>
+              <ul id="group-activities" class="mt-5 space-y-4">
+                <li class="flex items-center gap-3 text-sm text-slate-700">
+                  <span class="text-[#18b6a4]">✓</span> Discuss research questions
+                </li>
+                <li class="flex items-center gap-3 text-sm text-slate-700">
+                  <span class="text-[#18b6a4]">✓</span> Share analytical approaches
+                </li>
+                <li class="flex items-center gap-3 text-sm text-slate-700">
+                  <span class="text-[#18b6a4]">✓</span> Explore collaborations
+                </li>
+              </ul>
+            </div>
+
+            <a href="/contact" class="mt-9 inline-flex items-center gap-3 font-bold text-[#159d90] hover:text-[#101c2c]">
+              Get involved <span>→</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY VALUES -->
+    <section class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            What brings us together
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            A community built around shared values.
+          </h2>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {principles.map((principle) => (
+            <article class="rounded-2xl border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-[#18b6a4] hover:shadow-lg">
+              <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#e7f7f5] text-3xl text-[#159d90]">
+                {principle.icon}
+              </div>
+              <h3 class="mt-7 font-['Space_Grotesk'] text-xl font-semibold text-[#101c2c]">
+                {principle.title}
+              </h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">
+                {principle.description}
+              </p>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTRIBUTION EXPLORER -->
+    <section id="get-involved" class="bg-[#f4f8fa] px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Get involved
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            Find your way to contribute.
+          </h2>
+          <p class="mt-6 leading-8 text-slate-600">
+            You don't need to be an expert in every area. Choose an interest,
+            explore an opportunity and start contributing at your own pace.
+          </p>
+        </div>
+
+        <!-- FILTER BUTTONS -->
+        <div class="mt-10 flex flex-wrap gap-3" id="contribution-filters">
+          <button type="button" data-filter="all" aria-pressed="true" class="filter-button rounded-full border border-[#101c2c] bg-[#101c2c] px-5 py-3 text-sm font-semibold text-white">
+            All opportunities
+          </button>
+          <button type="button" data-filter="development" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Development
+          </button>
+          <button type="button" data-filter="research" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Research
+          </button>
+          <button type="button" data-filter="documentation" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Documentation
+          </button>
+          <button type="button" data-filter="education" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Education
+          </button>
+          <button type="button" data-filter="testing" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Testing
+          </button>
+          <button type="button" data-filter="community" aria-pressed="false" class="filter-button rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#18b6a4]">
+            Community
+          </button>
+        </div>
+
+        <!-- CONTRIBUTION CARDS -->
+        <div id="contribution-grid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {contributionTypes.map((item) => (
+            <article data-category={item.category} class="contribution-card flex flex-col rounded-2xl border border-slate-200 bg-white p-7 transition hover:-translate-y-1 hover:border-[#18b6a4] hover:shadow-lg">
+              <div class="flex items-center justify-between">
+                <span class="rounded-md bg-[#e7f7f5] px-3 py-1.5 text-xs font-semibold text-[#159d90]">
+                  {item.label}
+                </span>
+                <span class="font-mono text-sm text-slate-300">{item.number}</span>
+              </div>
+
+              <h3 class="mt-7 font-['Space_Grotesk'] text-2xl font-semibold text-[#101c2c]">
+                {item.title}
+              </h3>
+
+              <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">
+                {item.description}
+              </p>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <span class="rounded-md bg-slate-100 px-3 py-1.5 text-xs text-slate-600">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <a href="/contact" class="mt-8 flex items-center justify-between border-t border-slate-100 pt-5 text-sm font-bold text-[#159d90] hover:text-[#101c2c]">
+                Express your interest <span>→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <p id="filter-count" aria-live="polite" class="mt-7 text-sm text-slate-500">
+          Showing all 6 contribution opportunities.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- CONTRIBUTION PATHWAY -->
+    <section class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-[#18b6a4]">
+            Your contribution journey
+          </p>
+          <h2 class="mt-4 font-['Space_Grotesk'] text-4xl font-semibold text-[#101c2c] md:text-5xl">
+            From your first idea to a shared resource.
+          </h2>
+          <p class="mt-5 leading-8 text-slate-600">
+            A simple pathway for people who want to get involved in open
+            scientific development.
+          </p>
+        </div>
+
+        <div class="relative mt-16 grid gap-10 md:grid-cols-4">
+
+          <div class="absolute left-[12%] right-[12%] top-7 hidden h-px bg-slate-200 md:block"></div>
+
+          <div class="relative">
+            <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#18b6a4] font-mono font-bold text-[#101c2c] shadow">01</div>
+            <h3 class="mt-7 text-xl font-bold text-[#101c2c]">Explore</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Discover the research areas, resources and projects that interest you.</p>
+          </div>
+
+          <div class="relative">
+            <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#18b6a4] font-mono font-bold text-[#101c2c] shadow">02</div>
+            <h3 class="mt-7 text-xl font-bold text-[#101c2c]">Connect</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Introduce yourself and share your interests, skills and ideas.</p>
+          </div>
+
+          <div class="relative">
+            <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#18b6a4] font-mono font-bold text-[#101c2c] shadow">03</div>
+            <h3 class="mt-7 text-xl font-bold text-[#101c2c]">Contribute</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Participate in documentation, development, testing or research activities.</p>
+          </div>
+
+          <div class="relative">
+            <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#18b6a4] font-mono font-bold text-[#101c2c] shadow">04</div>
+            <h3 class="mt-7 text-xl font-bold text-[#101c2c]">Share</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Help make useful knowledge and resources available to others.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY CTA -->
+    <section class="bg-[#101c2c] px-6 py-24 text-white">
+      <div class="mx-auto max-w-5xl text-center">
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#18b6a4]/10 text-3xl text-[#18b6a4]">
+          ✳
+        </div>
+
+        <p class="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-[#18b6a4]">
+          Be part of the journey
+        </p>
+
+        <h2 class="mt-5 font-['Space_Grotesk'] text-4xl font-semibold leading-tight md:text-6xl">
+          Your ideas can contribute to better science.
+        </h2>
+
+        <p class="mx-auto mt-7 max-w-2xl leading-8 text-slate-300">
+          Whether you are a researcher, student, developer or simply curious
+          about computational biology, there is a place for your ideas.
+          Let's build something valuable together.
+        </p>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a href="/contact"
+            class="rounded-lg bg-[#18b6a4] px-8 py-4 font-bold text-[#101c2c] transition hover:bg-white">
+            Contact Bioxflow →
+          </a>
+
+          <a href="/contribute"
+            class="rounded-lg border border-white/20 px-8 py-4 font-semibold transition hover:border-[#18b6a4] hover:text-[#18b6a4]">
+            Contribution guidelines
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Interactive community network
+    const communityData = {
+      researchers: {
+        number: '01 / 04',
+        icon: '⌬',
+        title: 'Researchers',
+        description: 'Connect with scientists exploring genomics, infectious diseases, transcriptomics, molecular biology and computational research.',
+        activities: ['Discuss research questions', 'Share analytical approaches', 'Explore collaborations']
+      },
+      developers: {
+        number: '02 / 04',
+        icon: '</>',
+        title: 'Developers',
+        description: 'Build useful scientific software, develop reproducible workflows and improve computational tools for biological research.',
+        activities: ['Develop pipelines', 'Improve documentation', 'Contribute code']
+      },
+      students: {
+        number: '03 / 04',
+        icon: '✳',
+        title: 'Students & learners',
+        description: 'Learn bioinformatics, explore biological datasets and develop practical computational skills alongside the community.',
+        activities: ['Follow learning resources', 'Practise with datasets', 'Share learning experiences']
+      },
+      contributors: {
+        number: '04 / 04',
+        icon: '⌘',
+        title: 'Open-source contributors',
+        description: 'Help make scientific resources more accessible through code, testing, documentation, tutorials and community support.',
+        activities: ['Review contributions', 'Test workflows', 'Create tutorials']
+      }
+    };
+
+    const groupButtons = document.querySelectorAll('.network-node');
+
+    groupButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.group;
+        const group = communityData[key];
+
+        if (!group) return;
+
+        document.querySelector('#group-number').textContent = group.number;
+        document.querySelector('#group-icon').textContent = group.icon;
+        document.querySelector('#group-title').textContent = group.title;
+        document.querySelector('#group-description').textContent = group.description;
+
+        const activityList = document.querySelector('#group-activities');
+        activityList.replaceChildren();
+
+        group.activities.forEach((activity) => {
+          const li = document.createElement('li');
+          li.className = 'flex items-center gap-3 text-sm text-slate-700';
+
+          const tick = document.createElement('span');
+          tick.className = 'text-[#18b6a4]';
+          tick.textContent = '✓';
+
+          const text = document.createElement('span');
+          text.textContent = activity;
+
+          li.append(tick, text);
+          activityList.append(li);
+        });
+
+        groupButtons.forEach((item) => {
+          const active = item === button;
+          item.setAttribute('aria-pressed', String(active));
+          item.classList.toggle('border-teal-400', active);
+          item.classList.toggle('border-white/10', !active);
+          item.classList.toggle('shadow-[0_0_25px_rgba(24,182,164,.2)]', active);
+        });
+      });
+    });
+
+    // Interactive contribution filters
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const contributionCards = document.querySelectorAll('.contribution-card');
+    const filterCount = document.querySelector('#filter-count');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        let visibleCount = 0;
+
+        filterButtons.forEach((item) => {
+          const active = item === button;
+          item.setAttribute('aria-pressed', String(active));
+          item.classList.toggle('bg-[#101c2c]', active);
+          item.classList.toggle('text-white', active);
+          item.classList.toggle('border-[#101c2c]', active);
+          item.classList.toggle('bg-white', !active);
+          item.classList.toggle('text-slate-600', !active);
+          item.classList.toggle('border-slate-300', !active);
+        });
+
+        contributionCards.forEach((card) => {
+          const visible = filter === 'all' || card.dataset.category === filter;
+          card.hidden = !visible;
+
+          if (visible) visibleCount++;
+        });
+
+        filterCount.textContent = filter === 'all'
+          ? `Showing all ${visibleCount} contribution opportunities.`
+          : `Showing ${visibleCount} ${button.textContent.trim().toLowerCase()} opportunity.`;
+      });
+    });
+  </script>
+
+</MainLayout>

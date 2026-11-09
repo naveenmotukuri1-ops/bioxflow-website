@@ -1,16 +1,106 @@
+
 ---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout>
+  <Navbar />
+
+  <main>
+    <section class="relative overflow-hidden bg-[#101c2c] px-6 py-28 text-white">
+
+      <div class="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl"></div>
+
+      <div class="relative mx-auto grid max-w-7xl items-center gap-16 md:grid-cols-2">
+
+        <div>
+          <p class="mb-6 inline-block rounded-full border border-teal-400/30 px-4 py-2 text-sm text-teal-300">
+            Advancing computational biology
+          </p>
+
+          <h1 class="text-5xl font-bold leading-tight tracking-tight md:text-7xl">
+            Transforming biological data into
+            <span class="text-[#18b6a4]">discovery.</span>
+          </h1>
+
+          <p class="mt-7 max-w-xl text-lg leading-8 text-slate-300">
+            Explore reproducible bioinformatics pipelines, genomic analysis
+            workflows and collaborative research resources.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="/pipelines"
+              class="rounded-lg bg-[#18b6a4] px-7 py-4 font-semibold text-[#101c2c] hover:bg-teal-300">
+              Explore pipelines →
+            </a>
+
+            <a href="/about"
+              class="rounded-lg border border-slate-500 px-7 py-4 font-semibold hover:bg-white/10">
+              Discover Bioxflow
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur">
+
+          <p class="mb-6 text-sm font-semibold uppercase tracking-widest text-teal-300">
+            The bioinformatics ecosystem
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+
+            <div class="rounded-2xl bg-white/10 p-6">
+              <p class="text-3xl">🧬</p>
+              <h3 class="mt-4 font-semibold">Genomics</h3>
+              <p class="mt-2 text-sm text-slate-400">Explore genomic variation and sequencing.</p>
+            </div>
+
+            <div class="rounded-2xl bg-white/10 p-6">
+              <p class="text-3xl">🧪</p>
+              <h3 class="mt-4 font-semibold">Transcriptomics</h3>
+              <p class="mt-2 text-sm text-slate-400">Understand gene expression and RNA-seq.</p>
+            </div>
+
+            <div class="rounded-2xl bg-white/10 p-6">
+              <p class="text-3xl">💻</p>
+              <h3 class="mt-4 font-semibold">Pipelines</h3>
+              <p class="mt-2 text-sm text-slate-400">Build reproducible analysis workflows.</p>
+            </div>
+
+            <div class="rounded-2xl bg-white/10 p-6">
+              <p class="text-3xl">🤝</p>
+              <h3 class="mt-4 font-semibold">Community</h3>
+              <p class="mt-2 text-sm text-slate-400">Collaborate and share knowledge.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-24">
+
+      <p class="font-semibold uppercase tracking-widest text-teal-600">
+        What we do
+      </p>
+
+      <h2 class="mt-4 text-4xl font-bold text-[#101c2c]">
+        Building a connected bioinformatics ecosystem.
+      </h2>
+
+      <p class="mt-5 max-w-2xl leading-8 text-slate-600">
+        Bioxflow aims to make computational biology more accessible
+        through open workflows, practical learning and scientific collaboration.
+      </p>
+
+    </section>
+  </main>
+
+  <footer class="bg-[#101c2c] px-6 py-10 text-center text-sm text-slate-400">
+    © 2026 Bioxflow. Built for biological discovery.
+  </footer>
+
+</MainLayout>
+

@@ -1,0 +1,529 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const sections = [
+  {
+    heading: 'GETTING STARTED',
+    links: [
+      { label: 'Introduction', href: '#introduction' },
+      { label: 'Installation', href: '#installation' },
+      { label: 'Quick start', href: '#quick-start' }
+    ]
+  },
+  {
+    heading: 'WORKFLOW TECHNOLOGIES',
+    links: [
+      { label: 'Nextflow', href: '#nextflow' },
+      { label: 'Snakemake', href: '#snakemake' },
+      { label: 'Environments', href: '#environments' }
+    ]
+  },
+  {
+    heading: 'PIPELINE GUIDES',
+    links: [
+      { label: 'Whole-genome sequencing', href: '#wgs' },
+      { label: 'RNA-seq analysis', href: '#rnaseq' },
+      { label: 'AMR genomics', href: '#amr' }
+    ]
+  },
+  {
+    heading: 'HELP & RESOURCES',
+    links: [
+      { label: 'Troubleshooting', href: '#troubleshooting' },
+      { label: 'Contributing', href: '#contributing' }
+    ]
+  }
+];
+---
+
+<MainLayout
+  title="Documentation | Bioxflow"
+  description="Bioxflow documentation for bioinformatics workflows, installation, Nextflow, Snakemake, genomics and computational biology."
+>
+  <Navbar />
+
+  <main class="min-h-screen bg-white">
+
+    <!-- Documentation heading -->
+    <section class="border-b border-slate-200 bg-[#f4f8fa] px-6 py-14">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-sm font-medium text-slate-500">
+          BIOXFLOW <span class="mx-2">/</span> DOCUMENTATION
+        </div>
+
+        <h1 class="mt-5 text-4xl font-bold tracking-tight text-[#101c2c] md:text-5xl">
+          Documentation
+        </h1>
+
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+          Everything you need to explore, understand and work with
+          reproducible bioinformatics workflows.
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <span class="rounded-full bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">
+            Workflow guides
+          </span>
+          <span class="rounded-full bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">
+            Installation
+          </span>
+          <span class="rounded-full bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">
+            Tutorials
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Documentation layout -->
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 py-12 md:grid-cols-[250px_minmax(0,1fr)]">
+
+      <!-- Sidebar -->
+      <aside class="md:sticky md:top-24 md:h-[calc(100vh-7rem)] md:overflow-y-auto">
+        <div class="mb-6">
+          <p class="text-xs font-bold tracking-widest text-slate-400">
+            DOCUMENTATION MENU
+          </p>
+        </div>
+
+        <nav class="space-y-8">
+          {sections.map((section) => (
+            <div>
+              <h2 class="mb-3 text-xs font-bold tracking-widest text-[#139e91]">
+                {section.heading}
+              </h2>
+
+              <ul class="space-y-2 border-l border-slate-200">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="block border-l-2 border-transparent py-1.5 pl-4 text-sm text-slate-600 transition hover:border-[#18b6a4] hover:text-[#138f83]"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div class="mt-10 rounded-xl bg-[#edf8f6] p-5">
+          <p class="font-bold text-[#101c2c]">Need assistance?</p>
+          <p class="mt-2 text-sm leading-6 text-slate-600">
+            Have a question about a workflow or computational method?
+          </p>
+          <a
+            href="/contact"
+            class="mt-4 inline-flex text-sm font-bold text-[#138f83] hover:underline"
+          >
+            Contact Bioxflow →
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main documentation content -->
+      <article class="min-w-0 max-w-4xl">
+
+        <!-- Introduction -->
+        <section id="introduction" class="scroll-mt-28 border-b border-slate-200 pb-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            GETTING STARTED
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Welcome to Bioxflow
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Bioxflow is being developed as a bioinformatics platform for
+            reproducible computational biology and genomic data analysis.
+            Our goal is to make computational workflows easier to understand,
+            execute, reproduce and extend.
+          </p>
+
+          <p class="mt-4 leading-8 text-slate-600">
+            This documentation introduces the technologies, methods and
+            workflow concepts behind the platform. It will expand as individual
+            pipelines are developed, tested and released.
+          </p>
+
+          <div class="mt-7 rounded-xl border border-[#b9e8df] bg-[#f0faf7] p-5">
+            <p class="font-bold text-[#116f65]">A note about workflow availability</p>
+            <p class="mt-2 text-sm leading-7 text-slate-600">
+              Some guides currently describe planned or illustrative workflows.
+              Always check the relevant project repository for implementation
+              status, tested versions and validated instructions before running
+              an analysis.
+            </p>
+          </div>
+        </section>
+
+        <!-- Installation -->
+        <section id="installation" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            SETTING UP YOUR ENVIRONMENT
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Installation and prerequisites
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Bioinformatics workflows often require several software tools
+            and dependencies. Before running a workflow, check its individual
+            requirements and supported operating systems.
+          </p>
+
+          <h3 class="mt-8 text-xl font-bold text-[#101c2c]">
+            Recommended tools
+          </h3>
+
+          <div class="mt-5 overflow-hidden rounded-xl border border-slate-200">
+            <div class="grid grid-cols-[1fr_1.5fr] border-b border-slate-200 bg-slate-50 px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+              <span>Tool</span>
+              <span>Purpose</span>
+            </div>
+
+            {[
+              ['Nextflow', 'Workflow orchestration'],
+              ['Snakemake', 'Workflow management'],
+              ['Conda / Mamba', 'Software environments'],
+              ['Docker', 'Containerised environments'],
+              ['Git', 'Version control']
+            ].map(([tool, purpose]) => (
+              <div class="grid grid-cols-[1fr_1.5fr] border-b border-slate-100 px-5 py-4 text-sm last:border-0">
+                <span class="font-semibold text-[#101c2c]">{tool}</span>
+                <span class="text-slate-600">{purpose}</span>
+              </div>
+            ))}
+          </div>
+
+          <p class="mt-5 text-sm leading-7 text-slate-500">
+            These are general recommendations. Individual workflows may have
+            additional software and hardware requirements.
+          </p>
+        </section>
+
+        <!-- Quick start -->
+        <section id="quick-start" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            YOUR FIRST WORKFLOW
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Quick start
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            A typical bioinformatics workflow begins with raw sequencing
+            data, applies quality control and preprocessing, and generates
+            analysis results and reports.
+          </p>
+
+          <h3 class="mt-8 text-xl font-bold text-[#101c2c]">
+            Example project setup
+          </h3>
+
+          <div class="mt-4 overflow-hidden rounded-xl bg-[#101c2c]">
+            <div class="flex items-center justify-between border-b border-slate-700 px-5 py-3">
+              <span class="text-xs font-semibold text-slate-300">TERMINAL</span>
+              <span class="text-xs text-[#18b6a4]">Shell commands</span>
+            </div>
+            <pre class="overflow-x-auto p-5 text-sm leading-8 text-slate-200"><code>mkdir my-bioinformatics-project
+cd my-bioinformatics-project
+
+mkdir data results scripts reports
+
+# Keep your input FASTQ files in data/
+# Store analysis outputs in results/
+# Store workflow scripts in scripts/</code></pre>
+          </div>
+
+          <h3 class="mt-8 text-xl font-bold text-[#101c2c]">
+            Example project structure
+          </h3>
+
+          <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <pre class="overflow-x-auto text-sm leading-7 text-slate-700"><code>my-bioinformatics-project/
+├── data/
+├── results/
+├── scripts/
+├── reports/
+└── README.md</code></pre>
+          </div>
+
+          <p class="mt-5 text-sm leading-7 text-slate-500">
+            This is a generic project structure, not an executable Bioxflow
+            pipeline. Follow the relevant pipeline guide when a workflow
+            becomes available.
+          </p>
+        </section>
+
+        <!-- Nextflow -->
+        <section id="nextflow" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            WORKFLOW TECHNOLOGIES
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Nextflow
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            <strong>Nextflow</strong> is a workflow management system used
+            to build scalable and reproducible data analysis pipelines.
+            It supports execution across local computers, HPC systems and
+            cloud environments.
+          </p>
+
+          <h3 class="mt-7 text-xl font-bold text-[#101c2c]">
+            Check your installation
+          </h3>
+
+          <div class="mt-4 rounded-xl bg-[#101c2c] p-5">
+            <pre class="overflow-x-auto text-sm leading-7 text-slate-200"><code>nextflow -version</code></pre>
+          </div>
+
+          <p class="mt-5 text-sm leading-7 text-slate-600">
+            Nextflow requires a compatible Java installation. Consult the
+            official Nextflow documentation for current installation and
+            compatibility instructions.
+          </p>
+
+          <a href="https://www.nextflow.io/docs/latest/" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex font-semibold text-[#138f83] hover:underline">
+            Official Nextflow documentation →
+          </a>
+        </section>
+
+        <!-- Snakemake -->
+        <section id="snakemake" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <h2 class="text-3xl font-bold text-[#101c2c]">
+            Snakemake
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Snakemake is a workflow management system that uses rule-based
+            definitions to connect input files, computational steps and
+            output files. It is particularly useful for creating modular,
+            reproducible research workflows.
+          </p>
+
+          <h3 class="mt-7 text-xl font-bold text-[#101c2c]">
+            Check your installation
+          </h3>
+
+          <div class="mt-4 rounded-xl bg-[#101c2c] p-5">
+            <pre class="overflow-x-auto text-sm leading-7 text-slate-200"><code>snakemake --version</code></pre>
+          </div>
+
+          <a href="https://snakemake.readthedocs.io/" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex font-semibold text-[#138f83] hover:underline">
+            Official Snakemake documentation →
+          </a>
+        </section>
+
+        <!-- Environments -->
+        <section id="environments" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <h2 class="text-3xl font-bold text-[#101c2c]">
+            Computational environments
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Managing software versions is essential for reproducible
+            bioinformatics. Conda, Mamba and containers can help researchers
+            manage dependencies and reduce conflicts between tools.
+          </p>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-slate-200 p-5">
+              <h3 class="font-bold text-[#101c2c]">Conda / Mamba</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Manage software packages and isolated environments.
+              </p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-5">
+              <h3 class="font-bold text-[#101c2c]">Docker</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Package applications and their dependencies into containers.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- WGS -->
+        <section id="wgs" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            PIPELINE GUIDES
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Whole-genome sequencing
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Whole-genome sequencing analysis investigates the genetic
+            composition of an organism using sequencing data. A typical
+            short-read analysis may include quality control, trimming,
+            alignment, variant calling and annotation.
+          </p>
+
+          <div class="mt-6 rounded-xl border border-slate-200 p-5">
+            <p class="font-bold text-[#101c2c]">Typical analysis stages</p>
+            <ol class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>01 — Raw read quality assessment</li>
+              <li>02 — Adapter and quality trimming</li>
+              <li>03 — Reference genome alignment</li>
+              <li>04 — Alignment processing and quality checks</li>
+              <li>05 — Variant calling</li>
+              <li>06 — Variant annotation and reporting</li>
+            </ol>
+          </div>
+
+          <p class="mt-5 text-sm text-slate-500">
+            Workflow implementation and supported data types will be documented
+            in the corresponding project repository.
+          </p>
+        </section>
+
+        <!-- RNA-seq -->
+        <section id="rnaseq" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <h2 class="text-3xl font-bold text-[#101c2c]">
+            RNA-seq analysis
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            RNA sequencing enables researchers to investigate gene expression
+            and transcriptional changes across biological conditions.
+          </p>
+
+          <div class="mt-6 rounded-xl border border-slate-200 p-5">
+            <p class="font-bold text-[#101c2c]">Typical analysis stages</p>
+            <ol class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>01 — FASTQ quality control</li>
+              <li>02 — Adapter trimming and filtering</li>
+              <li>03 — Read alignment or transcript quantification</li>
+              <li>04 — Gene-level count generation</li>
+              <li>05 — Differential expression analysis</li>
+              <li>06 — Functional enrichment and visualisation</li>
+            </ol>
+          </div>
+
+          <p class="mt-5 text-sm text-slate-500">
+            Tools and methods depend on the experimental design, organism
+            and sequencing strategy.
+          </p>
+        </section>
+
+        <!-- AMR -->
+        <section id="amr" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <h2 class="text-3xl font-bold text-[#101c2c]">
+            Antimicrobial resistance genomics
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            AMR genomics uses bacterial sequencing data to investigate
+            antimicrobial resistance determinants, virulence factors,
+            plasmids and genetic relationships between isolates.
+          </p>
+
+          <div class="mt-6 rounded-xl border border-slate-200 p-5">
+            <p class="font-bold text-[#101c2c]">Potential analysis components</p>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li>• Genome assembly and quality assessment</li>
+              <li>• Species identification and genome annotation</li>
+              <li>• Antimicrobial resistance gene screening</li>
+              <li>• Virulence factor identification</li>
+              <li>• Plasmid and mobile genetic element analysis</li>
+              <li>• Comparative genomics and reporting</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="scroll-mt-28 border-b border-slate-200 py-12">
+          <p class="text-xs font-bold tracking-widest text-[#139e91]">
+            HELP & RESOURCES
+          </p>
+
+          <h2 class="mt-3 text-3xl font-bold text-[#101c2c]">
+            Troubleshooting
+          </h2>
+
+          <div class="mt-6 space-y-5">
+            <div>
+              <h3 class="font-bold text-[#101c2c]">
+                Command not found
+              </h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Check whether the software is installed and whether its
+                executable is available in your system PATH.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-[#101c2c]">
+                Dependency conflicts
+              </h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Check the workflow environment configuration and software
+                version requirements. Use an isolated environment where
+                appropriate.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-[#101c2c]">
+                Workflow execution fails
+              </h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Review the execution log, input file paths, resource
+                requirements and configuration parameters.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contributing -->
+        <section id="contributing" class="scroll-mt-28 py-12">
+          <h2 class="text-3xl font-bold text-[#101c2c]">
+            Contributing to Bioxflow
+          </h2>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Bioxflow aims to encourage collaboration in computational
+            biology. Contributions may include workflow development,
+            documentation, testing, bug reports and scientific feedback.
+          </p>
+
+          <a href="/contribute" class="mt-6 inline-flex rounded-lg bg-[#101c2c] px-6 py-3 font-semibold text-white transition hover:bg-[#173b4a]">
+            Learn how to contribute →
+          </a>
+        </section>
+
+        <!-- Page footer navigation -->
+        <div class="mt-8 rounded-2xl bg-[#f0f8f7] p-7">
+          <p class="text-sm font-bold text-[#138f83]">
+            CONTINUE EXPLORING
+          </p>
+          <h2 class="mt-3 text-2xl font-bold text-[#101c2c]">
+            Ready to explore our workflows?
+          </h2>
+          <p class="mt-3 text-sm leading-7 text-slate-600">
+            Visit the Pipelines section to explore Bioxflow's workflow
+            categories and development roadmap.
+          </p>
+          <a href="/pipelines" class="mt-5 inline-flex font-bold text-[#138f83] hover:underline">
+            Explore pipelines →
+          </a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="bg-[#0b1522] px-6 py-8 text-center text-sm text-slate-400">
+    © 2026 Bioxflow. Bioinformatics · Genomics · Computational Biology.
+  </footer>
+</MainLayout>
