@@ -1,0 +1,33 @@
+---
+/**
+ * Bioxflow mark: two DNA strands cross to form the "x" of Bioxflow,
+ * then merge into a single output node — raw data flowing into one result.
+ */
+interface Props {
+  size?: number;
+  withText?: boolean;
+  tone?: 'light' | 'dark'; // 'dark' = for dark backgrounds
+  class?: string;
+}
+const { size = 36, withText = true, tone = 'light', class: className = '' } = Astro.props;
+const strandB = tone === 'dark' ? '#f5b84b' : '#0e1b2b';
+const word = tone === 'dark' ? 'text-white' : 'text-[#0e1b2b]';
+---
+<span class={`inline-flex items-center gap-2.5 ${className}`}>
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <g stroke-linecap="round">
+      <line x1="10.5" y1="16" x2="10.5" y2="32" stroke="#18b6a4" stroke-width="2" opacity=".35" />
+      <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#18b6a4" stroke-width="2" opacity=".35" />
+      <path d="M6 14C16 14 18 34 28 34C35 34 37 24 42 24" stroke="#18b6a4" stroke-width="4" />
+      <path d="M6 34C16 34 18 14 28 14C35 14 37 24 42 24" stroke={strandB} stroke-width="4" />
+    </g>
+    <circle cx="6" cy="14" r="3.2" fill="#18b6a4" />
+    <circle cx="6" cy="34" r="3.2" fill={strandB} />
+    <circle cx="42" cy="24" r="4.6" fill="#18b6a4" />
+  </svg>
+  {withText && (
+    <span class={`font-display text-[1.45rem] font-bold tracking-tight ${word}`}>
+      biox<span class="text-[#18b6a4]">flow</span>
+    </span>
+  )}
+</span>

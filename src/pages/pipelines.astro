@@ -1,284 +1,104 @@
-
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Navbar from '../components/Navbar.astro';
+import PipelineCard from '../components/PipelineCard.astro';
+import { pipelines, categories } from '../data/pipelines';
 
-const pipelines = [
-  {
-    number: '01',
-    category: 'GENOMICS',
-    title: 'Whole-genome sequencing',
-    description: 'A workflow concept for processing sequencing reads, assessing quality, mapping reads, calling variants and exploring genomic variation.',
-    tools: ['FastQC', 'Fastp', 'BWA', 'SAMtools'],
-    status: 'In development',
-    icon: '🧬',
-    tags: ['WGS', 'Variant analysis']
-  },
-  {
-    number: '02',
-    category: 'TRANSCRIPTOMICS',
-    title: 'Bulk RNA-seq analysis',
-    description: 'A reproducible workflow concept for RNA-seq quality control, read quantification, differential expression and gene expression visualisation.',
-    tools: ['FastQC', 'Fastp', 'STAR', 'DESeq2'],
-    status: 'In development',
-    icon: '📊',
-    tags: ['RNA-seq', 'Gene expression']
-  },
-  {
-    number: '03',
-    category: 'SINGLE-CELL',
-    title: 'Single-cell RNA-seq',
-    description: 'A workflow concept for quality control, normalisation, dimensionality reduction, clustering and cell-type annotation.',
-    tools: ['Scanpy', 'Seurat', 'Python', 'R'],
-    status: 'Planned',
-    icon: '🔬',
-    tags: ['scRNA-seq', 'Cell clustering']
-  },
-  {
-    number: '04',
-    category: 'MICROBIAL GENOMICS',
-    title: 'Antimicrobial resistance genomics',
-    description: 'Explore bacterial genomes, antimicrobial resistance determinants, virulence genes and mobile genetic elements.',
-    tools: ['AMRFinderPlus', 'ABRicate', 'BLAST', 'Prokka'],
-    status: 'In development',
-    icon: '🦠',
-    tags: ['AMR', 'Bacterial genomics']
-  },
-  {
-    number: '05',
-    category: 'GENETICS',
-    title: 'Genomic variant analysis',
-    description: 'A workflow concept covering read alignment, variant calling, filtering and functional annotation.',
-    tools: ['BWA', 'GATK', 'BCFtools', 'VEP'],
-    status: 'Planned',
-    icon: '🧪',
-    tags: ['VCF', 'Variant calling']
-  },
-  {
-    number: '06',
-    category: 'METAGENOMICS',
-    title: 'Metagenomic analysis',
-    description: 'A workflow concept for sequencing quality control, taxonomic profiling and microbial community analysis.',
-    tools: ['Kraken2', 'Bracken', 'MetaPhlAn', 'MultiQC'],
-    status: 'Planned',
-    icon: '🌐',
-    tags: ['Microbiome', 'Taxonomy']
-  }
-];
+const statuses = ['Released', 'In development', 'Planned'];
 ---
 
 <MainLayout
-  title="Bioinformatics Pipelines | Bioxflow"
-  description="Explore reproducible bioinformatics workflow concepts for genomics, transcriptomics, single-cell analysis and antimicrobial resistance research."
+  title="Pipelines | Bioxflow"
+  description="Browse community-built bioinformatics pipelines for genomics, transcriptomics, single-cell, microbial genomics and metagenomics."
 >
-  <Navbar />
-
-  <main class="min-h-screen bg-[#f4f8fa]">
-
-    <!-- Page hero -->
-    <section class="relative overflow-hidden bg-[#101c2c] px-6 py-24 text-white">
-      <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#18b6a4]/10 blur-3xl"></div>
-
-      <div class="relative mx-auto max-w-7xl">
-        <span class="inline-flex rounded-full border border-[#18b6a4]/40 px-4 py-2 text-sm font-semibold text-[#18b6a4]">
-          BIOXFLOW WORKFLOWS
-        </span>
-
-        <div class="mt-8 max-w-4xl">
-          <h1 class="text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-            Reproducible pipelines.
-            <span class="text-[#18b6a4]">Reliable discovery.</span>
-          </h1>
-
-          <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
-            Explore computational workflows designed to transform biological
-            sequencing data into meaningful scientific insights.
-          </p>
-
-          <div class="mt-9 flex flex-wrap gap-4">
-            <a href="#explore" class="rounded-lg bg-[#18b6a4] px-7 py-4 font-bold text-[#101c2c] transition hover:bg-[#35d3bf]">
-              Explore workflows →
-            </a>
-            <a href="/contact" class="rounded-lg border border-slate-500 px-7 py-4 font-semibold text-white transition hover:border-[#18b6a4]">
-              Discuss a project
-            </a>
-          </div>
-        </div>
-
-        <div class="mt-16 grid grid-cols-2 gap-6 border-t border-slate-700 pt-8 md:grid-cols-4">
-          <div>
-            <p class="text-3xl font-bold text-[#18b6a4]">06</p>
-            <p class="mt-2 text-sm text-slate-400">Workflow categories</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold text-[#18b6a4]">NGS</p>
-            <p class="mt-2 text-sm text-slate-400">Data-driven research</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold text-[#18b6a4]">Open</p>
-            <p class="mt-2 text-sm text-slate-400">Reproducible approach</p>
-          </div>
-          <div>
-            <p class="text-3xl font-bold text-[#18b6a4]">R & Python</p>
-            <p class="mt-2 text-sm text-slate-400">Scientific computing</p>
-          </div>
-        </div>
+  <main class="bg-paper">
+    <section class="flow-bg relative overflow-hidden bg-ink text-white">
+      <div class="flow-lines absolute inset-0 opacity-70"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-flow">Catalogue</p>
+        <h1 class="mt-3 text-4xl font-bold tracking-tight md:text-5xl">Pipelines</h1>
+        <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
+          Reproducible analysis pipelines developed and reviewed by the Bioxflow community.
+        </p>
+        <label id="search" class="mt-8 flex max-w-2xl items-center gap-3 rounded-xl bg-white px-4 py-3.5 text-ink shadow-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" class="text-slate-400"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="sr-only">Search pipelines</span>
+          <input id="pipeline-search" type="search" placeholder="Search by name, tool or topic — e.g. rna-seq, GATK, amr" class="w-full bg-transparent outline-none placeholder:text-slate-400" />
+        </label>
       </div>
     </section>
 
-    <!-- Pipeline introduction -->
-    <section id="explore" class="px-6 py-20">
+    <section class="px-4 py-10 sm:px-6">
       <div class="mx-auto max-w-7xl">
-
-        <div class="mb-12 max-w-3xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#139e91]">
-            EXPLORE OUR WORKFLOWS
-          </p>
-          <h2 class="mt-4 text-3xl font-bold text-[#101c2c] md:text-4xl">
-            Bioinformatics workflows for modern research
-          </h2>
-          <p class="mt-5 leading-7 text-slate-600">
-            Discover workflow concepts across genomics, transcriptomics,
-            microbial genomics and computational biology. Each project will
-            include its methodology, tools, documentation and source code
-            as it becomes available.
-          </p>
-        </div>
-
-        <!-- Pipeline cards -->
-        <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-
-          {pipelines.map((pipeline) => (
-            <article class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#18b6a4] hover:shadow-xl">
-
-              <div class="flex items-center justify-between">
-                <span class="text-sm font-bold tracking-widest text-[#18b6a4]">
-                  {pipeline.number}
-                </span>
-                <span class="rounded-full bg-[#e9f8f5] px-3 py-1 text-xs font-semibold text-[#137f74]">
-                  {pipeline.status}
-                </span>
-              </div>
-
-              <div class="mt-7 flex h-14 w-14 items-center justify-center rounded-xl bg-[#edf8f7] text-3xl">
-                {pipeline.icon}
-              </div>
-
-              <p class="mt-6 text-xs font-bold tracking-[0.15em] text-[#139e91]">
-                {pipeline.category}
-              </p>
-
-              <h3 class="mt-3 text-2xl font-bold leading-snug text-[#101c2c]">
-                {pipeline.title}
-              </h3>
-
-              <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">
-                {pipeline.description}
-              </p>
-
-              <div class="mt-6 flex flex-wrap gap-2">
-                {pipeline.tags.map((tag) => (
-                  <span class="rounded-md bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div class="mt-6 border-t border-slate-100 pt-5">
-                <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Technologies
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  {pipeline.tools.map((tool) => (
-                    <span class="rounded-md border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <a href="/contact" class="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#138f83] transition group-hover:gap-3">
-                Discuss this workflow <span>→</span>
-              </a>
-
-            </article>
+        <div class="flex flex-wrap items-center gap-2" id="category-filters">
+          <button data-cat="all" class="cat-btn rounded-full border px-3.5 py-1.5 text-sm font-medium transition">All</button>
+          {categories.map((c) => (
+            <button data-cat={c} class="cat-btn rounded-full border px-3.5 py-1.5 text-sm font-medium transition">{c}</button>
           ))}
+          <select id="status-filter" class="ml-auto rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700" aria-label="Filter by status">
+            <option value="all">Any status</option>
+            {statuses.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </div>
 
+        <p id="result-count" class="mt-6 text-sm text-slate-500" aria-live="polite"></p>
+
+        <div id="pipeline-grid" class="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {pipelines.map((p) => <PipelineCard pipeline={p} />)}
+        </div>
+
+        <div id="empty-state" class="mt-6 hidden rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
+          <p class="font-semibold text-ink">No pipelines match your search.</p>
+          <p class="mt-2 text-sm text-slate-600">Can't find what you need? <a href="/contribute#pipelines" class="font-semibold text-flow-dark hover:underline">Propose a new pipeline →</a></p>
         </div>
       </div>
     </section>
 
-    <!-- Reproducibility section -->
-    <section class="bg-[#101c2c] px-6 py-20 text-white">
-      <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-center">
-
+    <section class="px-4 pb-20 sm:px-6">
+      <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-2xl border border-slate-200 bg-white p-8 md:flex-row md:items-center">
         <div>
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#18b6a4]">
-            BUILT FOR REPRODUCIBILITY
-          </p>
-
-          <h2 class="mt-5 text-3xl font-bold leading-tight md:text-5xl">
-            From raw data to reproducible science.
-          </h2>
-
-          <p class="mt-6 leading-8 text-slate-300">
-            Our approach is centred on transparent workflows, documented
-            methods, version-controlled code and reproducible computational
-            environments.
-          </p>
-
-          <a href="/documentation" class="mt-8 inline-flex rounded-lg bg-[#18b6a4] px-6 py-3.5 font-bold text-[#101c2c] transition hover:bg-[#35d3bf]">
-            Explore documentation →
-          </a>
+          <h2 class="text-2xl font-bold text-ink">Missing a pipeline?</h2>
+          <p class="mt-2 text-slate-600">Propose it to the community and build it with the Bioxflow template.</p>
         </div>
-
-        <div class="rounded-2xl border border-slate-700 bg-[#192a3d] p-7">
-          <p class="mb-5 text-sm font-bold text-[#18b6a4]">WORKFLOW PRINCIPLES</p>
-
-          <div class="space-y-5">
-            {[
-              ['01', 'Reproducible execution', 'Consistent computational environments and workflow management.'],
-              ['02', 'Transparent methods', 'Clear documentation of tools, parameters and analysis steps.'],
-              ['03', 'Open collaboration', 'Version-controlled projects and community contributions.'],
-              ['04', 'Scientific quality', 'Quality control and validation at relevant stages.']
-            ].map(([number, title, description]) => (
-              <div class="flex gap-4">
-                <span class="font-mono text-sm text-[#18b6a4]">{number}</span>
-                <div>
-                  <h3 class="font-bold">{title}</h3>
-                  <p class="mt-1 text-sm leading-6 text-slate-400">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        <a href="/contribute#pipelines" class="rounded-lg bg-ink px-6 py-3.5 font-semibold text-white transition hover:bg-flow-dark">Propose a pipeline →</a>
       </div>
     </section>
-
-    <!-- Call to action -->
-    <section class="px-6 py-20">
-      <div class="mx-auto max-w-5xl rounded-3xl bg-[#e5f6f3] px-7 py-14 text-center md:px-16">
-        <p class="text-sm font-bold uppercase tracking-widest text-[#138f83]">
-          COLLABORATE WITH BIOXFLOW
-        </p>
-        <h2 class="mt-5 text-3xl font-bold text-[#101c2c] md:text-4xl">
-          Have a research workflow in mind?
-        </h2>
-        <p class="mx-auto mt-5 max-w-2xl leading-7 text-slate-600">
-          Let's explore opportunities to develop, document and improve
-          reproducible bioinformatics workflows together.
-        </p>
-        <a href="/contact" class="mt-8 inline-flex rounded-lg bg-[#101c2c] px-7 py-4 font-bold text-white transition hover:bg-[#173b4a]">
-          Get in touch →
-        </a>
-      </div>
-    </section>
-
   </main>
-
-  <footer class="bg-[#0b1522] px-6 py-8 text-center text-sm text-slate-400">
-    © 2026 Bioxflow. Bioinformatics · Genomics · Computational Biology.
-  </footer>
-
 </MainLayout>
+
+<script>
+  const search = document.getElementById('pipeline-search') as HTMLInputElement;
+  const status = document.getElementById('status-filter') as HTMLSelectElement;
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.cat-btn')];
+  const cards = [...document.querySelectorAll<HTMLElement>('.pipeline-card')];
+  const count = document.getElementById('result-count')!;
+  const empty = document.getElementById('empty-state')!;
+  let cat = 'all';
+
+  const on = 'border-ink bg-ink text-white';
+  const off = 'border-slate-300 bg-white text-slate-700 hover:border-flow';
+
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+    for (const c of cards) {
+      const ok = (!q || c.dataset.search!.includes(q))
+        && (cat === 'all' || c.dataset.category === cat)
+        && (status.value === 'all' || c.dataset.status === status.value);
+      c.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    }
+    for (const b of buttons) {
+      const active = b.dataset.cat === cat;
+      b.className = b.className.replace(on, '').replace(off, '').trim() + ' ' + (active ? on : off);
+      b.setAttribute('aria-pressed', String(active));
+    }
+    count.textContent = `${shown} of ${cards.length} pipelines`;
+    empty.classList.toggle('hidden', shown > 0);
+  }
+
+  buttons.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.cat!; apply(); }));
+  search.addEventListener('input', apply);
+  status.addEventListener('change', apply);
+  if (location.hash === '#search') search.focus();
+  apply();
+</script>

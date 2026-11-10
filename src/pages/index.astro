@@ -1,106 +1,143 @@
-
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Navbar from '../components/Navbar.astro';
+import Logo from '../components/Logo.astro';
+import PipelineCard from '../components/PipelineCard.astro';
+import { pipelines, categories } from '../data/pipelines';
+
+const featured = pipelines.filter((p) => p.status !== 'Planned').slice(0, 3);
+
+const stats = [
+  [String(pipelines.length), 'Pipelines in the catalogue'],
+  [String(categories.length), 'Analysis areas'],
+  ['2', 'Workflow engines'],
+  ['100%', 'Open source']
+];
+
+const steps = [
+  ['Propose', 'Suggest a pipeline and agree on its scope with the community before writing code.'],
+  ['Build', 'Start from the Bioxflow template: modular processes, containers and a standard layout.'],
+  ['Review', 'Community review and automated tests check that results are correct and reproducible.'],
+  ['Release', 'Versioned releases with documentation, test data and citable outputs.']
+];
+
+const features = [
+  ['Reproducible', 'Every step runs in a pinned Docker, Singularity or Conda environment, so results match across machines.', 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6'],
+  ['Portable', 'Run the same pipeline on a laptop, an HPC cluster or the cloud by switching one profile.', 'M3 7h18v10H3zM8 21h8M12 17v4'],
+  ['Standardised', 'A shared template, parameter schema and folder structure make every pipeline feel familiar.', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
+  ['Tested', 'Continuous integration runs each pipeline on small test datasets for every change.', 'M5 12l4 4L19 6'],
+  ['Documented', 'Usage guides, parameter references and output explanations come with every release.', 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7'],
+  ['Community-led', 'Developers, researchers and students design and maintain pipelines together.', 'M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3 3-5 6-5s6 2 6 5M14 15c3 0 8 1 8 5']
+];
 ---
 
 <MainLayout>
-  <Navbar />
-
   <main>
-    <section class="relative overflow-hidden bg-[#101c2c] px-6 py-28 text-white">
-
-      <div class="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl"></div>
-
-      <div class="relative mx-auto grid max-w-7xl items-center gap-16 md:grid-cols-2">
-
-        <div>
-          <p class="mb-6 inline-block rounded-full border border-teal-400/30 px-4 py-2 text-sm text-teal-300">
-            Advancing computational biology
-          </p>
-
-          <h1 class="text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-            Transforming biological data into
-            <span class="text-[#18b6a4]">discovery.</span>
-          </h1>
-
-          <p class="mt-7 max-w-xl text-lg leading-8 text-slate-300">
-            Explore reproducible bioinformatics pipelines, genomic analysis
-            workflows and collaborative research resources.
-          </p>
-
-          <div class="mt-10 flex flex-wrap gap-4">
-            <a href="/pipelines"
-              class="rounded-lg bg-[#18b6a4] px-7 py-4 font-semibold text-[#101c2c] hover:bg-teal-300">
-              Explore pipelines →
-            </a>
-
-            <a href="/about"
-              class="rounded-lg border border-slate-500 px-7 py-4 font-semibold hover:bg-white/10">
-              Discover Bioxflow
-            </a>
-          </div>
+    <!-- Hero -->
+    <section class="flow-bg relative overflow-hidden bg-ink text-white">
+      <div class="flow-lines absolute inset-0 opacity-70"></div>
+      <div class="relative mx-auto max-w-5xl px-4 pb-20 pt-20 text-center sm:px-6 md:pt-28">
+        <div class="flex justify-center"><Logo tone="dark" size={88} withText={false} /></div>
+        <h1 class="mt-8 text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl md:text-7xl">
+          Bioinformatics pipelines, <br class="hidden md:inline" />
+          <span class="bg-gradient-to-r from-flow to-amber bg-clip-text text-transparent">built together.</span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          Bioxflow is an open community for developing, reviewing and sharing reproducible
+          analysis pipelines — from raw reads to results.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href="/pipelines" class="rounded-lg bg-flow px-6 py-3.5 font-semibold text-ink transition hover:bg-[#35d3bf]">Browse pipelines →</a>
+          <a href="/contribute" class="rounded-lg border border-white/25 px-6 py-3.5 font-semibold transition hover:border-flow hover:bg-white/5">Start building</a>
         </div>
 
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur">
-
-          <p class="mb-6 text-sm font-semibold uppercase tracking-widest text-teal-300">
-            The bioinformatics ecosystem
-          </p>
-
-          <div class="grid grid-cols-2 gap-4">
-
-            <div class="rounded-2xl bg-white/10 p-6">
-              <p class="text-3xl">🧬</p>
-              <h3 class="mt-4 font-semibold">Genomics</h3>
-              <p class="mt-2 text-sm text-slate-400">Explore genomic variation and sequencing.</p>
-            </div>
-
-            <div class="rounded-2xl bg-white/10 p-6">
-              <p class="text-3xl">🧪</p>
-              <h3 class="mt-4 font-semibold">Transcriptomics</h3>
-              <p class="mt-2 text-sm text-slate-400">Understand gene expression and RNA-seq.</p>
-            </div>
-
-            <div class="rounded-2xl bg-white/10 p-6">
-              <p class="text-3xl">💻</p>
-              <h3 class="mt-4 font-semibold">Pipelines</h3>
-              <p class="mt-2 text-sm text-slate-400">Build reproducible analysis workflows.</p>
-            </div>
-
-            <div class="rounded-2xl bg-white/10 p-6">
-              <p class="text-3xl">🤝</p>
-              <h3 class="mt-4 font-semibold">Community</h3>
-              <p class="mt-2 text-sm text-slate-400">Collaborate and share knowledge.</p>
-            </div>
-
-          </div>
+        <div class="mx-auto mt-12 max-w-2xl overflow-x-auto rounded-xl border border-white/10 bg-black/30 px-5 py-4 text-left font-mono text-sm">
+          <p class="whitespace-nowrap"><span class="text-flow">$</span> nextflow run <span class="text-amber">bioxflow/rnaseq</span> -profile docker --input samplesheet.csv</p>
         </div>
+        <p class="mt-3 text-xs text-slate-500">Example command — pipelines are in active development.</p>
+      </div>
 
+      <div class="relative border-t border-white/10 bg-ink-2/60">
+        <dl class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-8 sm:px-6 md:grid-cols-4">
+          {stats.map(([value, label]) => (
+            <div class="text-center">
+              <dt class="font-display text-3xl font-bold text-white">{value}</dt>
+              <dd class="mt-1 text-sm text-slate-400">{label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-6 py-24">
+    <!-- Featured pipelines -->
+    <section class="bg-paper px-4 py-20 sm:px-6">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-flow-dark">Pipelines</p>
+            <h2 class="mt-3 text-3xl font-bold text-ink md:text-4xl">What the community is building</h2>
+          </div>
+          <a href="/pipelines" class="font-semibold text-flow-dark hover:underline">View all {pipelines.length} pipelines →</a>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featured.map((p) => <PipelineCard pipeline={p} />)}
+        </div>
+      </div>
+    </section>
 
-      <p class="font-semibold uppercase tracking-widest text-teal-600">
-        What we do
-      </p>
+    <!-- How it works -->
+    <section class="px-4 py-20 sm:px-6">
+      <div class="mx-auto max-w-7xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-flow-dark">How it works</p>
+        <h2 class="mt-3 max-w-2xl text-3xl font-bold text-ink md:text-4xl">From idea to released pipeline</h2>
+        <div class="relative mt-12">
+        <div aria-hidden="true" class="absolute left-[18px] top-[17px] hidden h-0.5 w-[calc(75%+1.5rem)] bg-gradient-to-r from-flow via-flow to-amber md:block"></div>
+        <ol class="relative grid gap-8 md:grid-cols-4">
+          {steps.map(([title, text], i) => (
+            <li class="relative">
+              <span class={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full font-mono text-sm font-semibold ring-4 ring-white ${i === steps.length - 1 ? 'bg-amber text-ink' : 'bg-flow text-ink'}`}>{i + 1}</span>
+              <h3 class="mt-5 text-lg font-semibold text-ink">{title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+            </li>
+          ))}
+        </ol>
+        </div>
+      </div>
+    </section>
 
-      <h2 class="mt-4 text-4xl font-bold text-[#101c2c]">
-        Building a connected bioinformatics ecosystem.
-      </h2>
+    <!-- Why Bioxflow -->
+    <section class="border-y border-slate-200 bg-paper px-4 py-20 sm:px-6">
+      <div class="mx-auto max-w-7xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-flow-dark">Why Bioxflow</p>
+        <h2 class="mt-3 max-w-2xl text-3xl font-bold text-ink md:text-4xl">Pipelines you can trust and reuse</h2>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map(([title, text, icon]) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-6">
+              <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-flow-soft text-flow-dark">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={icon} /></svg>
+              </span>
+              <h3 class="mt-4 text-lg font-semibold text-ink">{title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-      <p class="mt-5 max-w-2xl leading-8 text-slate-600">
-        Bioxflow aims to make computational biology more accessible
-        through open workflows, practical learning and scientific collaboration.
-      </p>
-
+    <!-- CTA -->
+    <section class="px-4 py-20 sm:px-6">
+      <div class="flow-bg relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-ink px-6 py-14 text-center text-white md:px-16">
+        <div class="flow-lines absolute inset-0"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-bold md:text-4xl">Have a pipeline in mind?</h2>
+          <p class="mx-auto mt-4 max-w-xl leading-7 text-slate-300">
+            Join developers and researchers building the next generation of open, reproducible analysis pipelines.
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="/contribute" class="rounded-lg bg-flow px-6 py-3.5 font-semibold text-ink transition hover:bg-[#35d3bf]">Contribute a pipeline</a>
+            <a href="/community" class="rounded-lg border border-white/25 px-6 py-3.5 font-semibold transition hover:border-flow">Join the community</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
-
-  <footer class="bg-[#101c2c] px-6 py-10 text-center text-sm text-slate-400">
-    © 2026 Bioxflow. Built for biological discovery.
-  </footer>
-
 </MainLayout>
-

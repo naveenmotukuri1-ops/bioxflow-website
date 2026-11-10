@@ -1,43 +1,40 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0e1b2b;
+  --color-ink-2: #16273b;
+  --color-flow: #18b6a4;
+  --color-flow-dark: #0f8f81;
+  --color-flow-soft: #e6f7f4;
+  --color-amber: #f5b84b;
+  --color-paper: #f5f8fa;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
 :root {
-  font-family: 'DM Sans', sans-serif;
   color: #172638;
   background: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
 
-* {
-  box-sizing: border-box;
-}
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; font-family: var(--font-sans); }
+h1, h2, h3, h4 { font-family: var(--font-display); }
+a { text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+::selection { background: #18b6a4; color: #ffffff; }
 
-html {
-  scroll-behavior: smooth;
+/* Signature background: faint flowing strands */
+.flow-bg {
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, rgb(24 182 164 / 0.16), transparent 60%),
+    radial-gradient(40rem 24rem at -10% 110%, rgb(245 184 75 / 0.10), transparent 60%);
 }
-
-body {
-  margin: 0;
-  min-width: 320px;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
-
-button, input, textarea {
-  font: inherit;
-}
-
-::selection {
-  background: #18b6a4;
-  color: #ffffff;
+.flow-lines {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' fill='none'%3E%3Cpath d='M0 30C60 30 60 90 120 90S180 30 240 30' stroke='%2318b6a4' stroke-opacity='.10' stroke-width='1.5'/%3E%3Cpath d='M0 90C60 90 60 30 120 30S180 90 240 90' stroke='%23f5b84b' stroke-opacity='.08' stroke-width='1.5'/%3E%3C/svg%3E");
 }
