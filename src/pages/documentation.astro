@@ -1,7 +1,6 @@
 
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Navbar from '../components/Navbar.astro';
 
 const sections = [
   {
@@ -42,7 +41,6 @@ const sections = [
   title="Documentation | Bioxflow"
   description="Bioxflow documentation for bioinformatics workflows, installation, Nextflow, Snakemake, genomics and computational biology."
 >
-  <Navbar />
 
   <main class="min-h-screen bg-white">
 
@@ -522,8 +520,4 @@ mkdir data results scripts reports
       </article>
     </div>
   </main>
-
-  <footer class="bg-[#0b1522] px-6 py-8 text-center text-sm text-slate-400">
-    © 2026 Bioxflow. Bioinformatics · Genomics · Computational Biology.
-  </footer>
 </MainLayout>
