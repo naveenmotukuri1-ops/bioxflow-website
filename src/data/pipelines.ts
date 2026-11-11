@@ -9,6 +9,9 @@ export interface Pipeline {
   tags: string[];
   status: PipelineStatus;
   engine: 'Nextflow' | 'Snakemake';
+  version?: string;
+  repo?: string;
+  page?: string;
 }
 
 export const pipelines: Pipeline[] = [
@@ -26,11 +29,14 @@ export const pipelines: Pipeline[] = [
     slug: 'rnaseq',
     title: 'Bulk RNA-seq',
     category: 'Transcriptomics',
-    description: 'Quality control, quantification and differential expression analysis for bulk RNA sequencing.',
-    tools: ['FastQC', 'fastp', 'STAR', 'DESeq2'],
-    tags: ['rna-seq', 'gene-expression', 'deseq2'],
-    status: 'In development',
-    engine: 'Nextflow'
+    description: 'FASTQ to differential expression. Every sample is quantified twice, by Salmon and by STAR, and the two results are compared before DESeq2 runs.',
+    tools: ['fastp', 'Salmon', 'STAR', 'DESeq2', 'MultiQC'],
+    tags: ['rna-seq', 'gene-expression', 'deseq2', 'concordance'],
+    status: 'Released',
+    engine: 'Nextflow',
+    version: '1.0.0',
+    repo: 'https://github.com/naveenmotukuri1-ops/bioxflow-rnaseq',
+    page: '/pipelines/rnaseq'
   },
   {
     slug: 'scrnaseq',

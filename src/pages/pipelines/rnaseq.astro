@@ -1,0 +1,176 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { pipelines } from '../../data/pipelines';
+
+const p = pipelines.find((x) => x.slug === 'rnaseq')!;
+const repo = p.repo!;
+
+const steps = [
+  ['Read QC and trimming', 'FastQC on the raw reads, then fastp with automatic adapter detection.'],
+  ['Quantification, route 1: Salmon', 'Selective alignment to a decoy-aware transcriptome index, with sequence and GC bias correction. The genome is added as decoy so reads from unannotated regions are not forced onto transcripts.'],
+  ['Quantification, route 2: STAR', 'Two-pass spliced alignment to the genome with ENCODE long-RNA settings and per-gene read counts. Sorted, indexed BAM files are kept for genome browsers.'],
+  ['Concordance gate', 'The two gene-count vectors are compared for every sample: rank correlation, share of genes within 2-fold, and whether both methods infer the same library strandedness. Samples that fail are marked REVIEW.'],
+  ['Differential expression', 'tximport gene-level summaries with transcript-length offsets, DESeq2 Wald tests with Benjamini-Hochberg correction, apeglm-shrunken fold changes, optional batch term and custom contrasts.'],
+  ['Report', 'One MultiQC page with the concordance table, PCA, sample distances, volcano plots and all tool statistics, plus plain TSV tables.']
+];
+
+const tools = [
+  ['FastQC', '0.12.1'], ['fastp', '0.24.0'], ['Salmon', '1.10.3'], ['STAR', '2.7.11b'], ['SAMtools', '1.21'],
+  ['gffread', '0.12.7'], ['tximport', '1.34.0'], ['DESeq2', '1.46.0'], ['apeglm', '1.28.0'], ['MultiQC', '1.25.1']
+];
+
+const quant = [
+  ['Salmon gene counts vs truth, Spearman', '0.974 – 0.977'],
+  ['STAR gene counts vs truth, Spearman', '0.922 – 0.925'],
+  ['Salmon vs STAR concordance, Spearman', '0.916 – 0.922'],
+  ['Fold change vs truth, Pearson r (shrunken)', '0.920']
+];
+const de = [
+  ['Truly differential genes tested', '818'],
+  ['Genes called at adjusted p < 0.05', '752'],
+  ['True positives', '728'],
+  ['False positives', '24'],
+  ['Observed false discovery rate', '3.2%'],
+  ['Called genes with the wrong direction', '0']
+];
+
+const code = 'overflow-x-auto rounded-xl bg-ink px-5 py-4 font-mono text-sm leading-7 text-slate-100';
+---
+
+<MainLayout
+  title="Bulk RNA-seq pipeline | Bioxflow"
+  description="bioxflow/rnaseq: a Nextflow RNA-seq pipeline that quantifies every sample with Salmon and STAR, checks that they agree, and runs DESeq2 differential expression."
+>
+  <main class="bg-paper">
+    <section class="flow-bg relative overflow-hidden bg-ink text-white">
+      <div class="flow-lines absolute inset-0 opacity-70"></div>
+      <div class="relative mx-auto max-w-5xl px-4 py-16 sm:px-6">
+        <p class="text-sm font-medium text-slate-400">
+          <a href="/pipelines" class="hover:text-flow">Pipelines</a> <span class="mx-2">/</span> {p.category}
+        </p>
+        <p class="mt-6 font-mono text-lg"><span class="text-slate-400">bioxflow/</span>rnaseq <span class="ml-2 rounded-full bg-emerald-400/15 px-2.5 py-1 align-middle font-sans text-xs font-semibold text-emerald-300 ring-1 ring-emerald-400/30">v{p.version}</span></p>
+        <h1 class="mt-3 text-4xl font-bold tracking-tight md:text-5xl">Bulk RNA-seq, quantified twice</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+          From FASTQ files to differential expression. Every sample is quantified by two independent
+          methods, Salmon and STAR, and the pipeline tells you where they disagree before you
+          interpret a single gene.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={repo} rel="noopener" class="rounded-lg bg-flow px-6 py-3.5 font-semibold text-ink transition hover:bg-[#35d3bf]">View on GitHub →</a>
+          <a href="#quick-start" class="rounded-lg border border-white/25 px-6 py-3.5 font-semibold transition hover:border-flow hover:bg-white/5">Quick start</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl space-y-14 px-4 py-14 sm:px-6">
+
+      <section>
+        <h2 class="text-2xl font-bold text-ink">Why two quantifications</h2>
+        <p class="mt-4 leading-8 text-slate-600">
+          Most RNA-seq pipelines ask you to trust one tool. Salmon and STAR share no code and use
+          different evidence: Salmon maps reads to transcripts and resolves ambiguity statistically,
+          STAR aligns reads to the genome and counts those that fall in one gene. When both give the
+          same gene counts, the result does not depend on the method. When they do not, something
+          about the sample or the annotation needs a look, and the pipeline says so.
+        </p>
+        <figure class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3">
+          <img src="/pipelines/rnaseq/concordance.png" alt="Scatter plots of Salmon gene counts against STAR gene counts for six test samples; most genes lie on the diagonal" loading="lazy" class="w-full" />
+          <figcaption class="px-2 pb-1 pt-3 text-sm text-slate-500">Concordance plot from the bundled test run. Each point is a gene.</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-ink">What it does</h2>
+        <ol class="mt-6 space-y-3">
+          {steps.map(([title, text], i) => (
+            <li class="flex gap-4 rounded-xl border border-slate-200 bg-white p-5">
+              <span class="font-mono text-sm font-medium text-flow-dark">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <p class="font-semibold text-ink">{title}</p>
+                <p class="mt-1 text-sm leading-6 text-slate-600">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="quick-start" class="scroll-mt-24">
+        <h2 class="text-2xl font-bold text-ink">Quick start</h2>
+        <p class="mt-4 leading-8 text-slate-600">
+          You need <a href="https://www.nextflow.io" class="font-semibold text-flow-dark hover:underline" rel="noopener">Nextflow</a> 25.04 or newer
+          and Docker, Singularity or conda. Run the bundled test data first; it takes about five minutes.
+        </p>
+        <pre class={`mt-5 ${code}`}>nextflow run naveenmotukuri1-ops/bioxflow-rnaseq -profile test,docker</pre>
+        <p class="mt-6 leading-8 text-slate-600">Then your own data, with a samplesheet that lists each sample and its condition:</p>
+        <pre class={`mt-5 ${code}`}>{`sample,fastq_1,fastq_2,condition
+ctrl_1,ctrl_1_R1.fastq.gz,ctrl_1_R2.fastq.gz,control
+ctrl_2,ctrl_2_R1.fastq.gz,ctrl_2_R2.fastq.gz,control
+ctrl_3,ctrl_3_R1.fastq.gz,ctrl_3_R2.fastq.gz,control
+drug_1,drug_1_R1.fastq.gz,drug_1_R2.fastq.gz,treated
+drug_2,drug_2_R1.fastq.gz,drug_2_R2.fastq.gz,treated
+drug_3,drug_3_R1.fastq.gz,drug_3_R2.fastq.gz,treated`}</pre>
+        <pre class={`mt-4 ${code}`}>{`nextflow run naveenmotukuri1-ops/bioxflow-rnaseq -profile docker \\
+    --input samplesheet.csv \\
+    --fasta genome.fa.gz --gtf genes.gtf.gz \\
+    --outdir results`}</pre>
+        <p class="mt-5 text-sm leading-7 text-slate-600">
+          On a laptop with about 16 GB of memory add <code class="rounded bg-flow-soft px-1.5 py-0.5 font-mono text-[0.8rem] text-flow-dark">-profile laptop</code>
+          to run Salmon only; STAR needs about 32 GB for a human genome.
+          Full instructions are in the
+          <a href={`${repo}/blob/main/docs/usage.md`} class="font-semibold text-flow-dark hover:underline" rel="noopener">usage guide</a> and the
+          <a href={`${repo}/blob/main/docs/output.md`} class="font-semibold text-flow-dark hover:underline" rel="noopener">output guide</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-ink">Tested against a known answer</h2>
+        <p class="mt-4 leading-8 text-slate-600">
+          The repository includes a read simulator that produces RNA-seq data for which the true
+          count of every gene and the true set of differential genes are known, and a script that
+          scores the pipeline against that truth. These are the measured results on the whole yeast genome:
+          6,531 genes, two conditions with three replicates each, about 500,000 read pairs per
+          sample, 980 genes made truly differential.
+        </p>
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          {[['Quantification', quant], ['Differential expression', de]].map(([name, rows]) => (
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <p class="border-b border-slate-200 bg-slate-50 px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-500">{name}</p>
+              {(rows as string[][]).map(([k, v]) => (
+                <div class="flex items-baseline justify-between gap-4 border-b border-slate-100 px-5 py-3 text-sm last:border-0">
+                  <span class="text-slate-600">{k}</span>
+                  <span class="shrink-0 font-mono font-medium text-ink">{v}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 rounded-xl border border-amber/50 bg-amber/10 p-5">
+          <p class="font-bold text-ink">What this does not show</p>
+          <p class="mt-2 text-sm leading-7 text-slate-700">
+            This is a simulation on yeast. It confirms that the pipeline computes the
+            right answer when the answer is known. It has not yet been benchmarked on real human or
+            mouse data against an independent reference, and real libraries have biases a simulator
+            does not model. The full method, numbers and limits are in
+            <a href={`${repo}/blob/main/benchmark/RESULTS.md`} class="font-semibold text-flow-dark hover:underline" rel="noopener">benchmark/RESULTS.md</a>,
+            and you can re-run the benchmark yourself with one command.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-ink">Pinned tool versions</h2>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {tools.map(([name, version]) => (
+            <span class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700">{name} <span class="ml-1 font-mono text-xs text-slate-400">{version}</span></span>
+          ))}
+        </div>
+        <p class="mt-5 text-sm leading-7 text-slate-600">
+          Released under the MIT License. The repository layout follows
+          <a href="https://nf-co.re" class="font-semibold text-flow-dark hover:underline" rel="noopener">nf-core</a> conventions, also MIT licensed;
+          this is an independent Bioxflow pipeline, not an nf-core pipeline. Please cite the tools you use: see
+          <a href={`${repo}/blob/main/CITATIONS.md`} class="font-semibold text-flow-dark hover:underline" rel="noopener">CITATIONS.md</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+</MainLayout>
