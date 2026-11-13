@@ -100,7 +100,7 @@ const code = 'overflow-x-auto rounded-xl bg-ink px-5 py-4 font-mono text-sm lead
           You need <a href="https://www.nextflow.io" class="font-semibold text-flow-dark hover:underline" rel="noopener">Nextflow</a> 25.04 or newer
           and Docker, Singularity or conda. Run the bundled test data first; it takes about five minutes.
         </p>
-        <pre class={`mt-5 ${code}`}>nextflow run naveenmotukuri1-ops/bioxflow-rnaseq -profile test,docker</pre>
+        <pre class={`mt-5 ${code}`}>nextflow run bioxflow/rnaseq -profile test,docker</pre>
         <p class="mt-6 leading-8 text-slate-600">Then your own data, with a samplesheet that lists each sample and its condition:</p>
         <pre class={`mt-5 ${code}`}>{`sample,fastq_1,fastq_2,condition
 ctrl_1,ctrl_1_R1.fastq.gz,ctrl_1_R2.fastq.gz,control
@@ -109,7 +109,7 @@ ctrl_3,ctrl_3_R1.fastq.gz,ctrl_3_R2.fastq.gz,control
 drug_1,drug_1_R1.fastq.gz,drug_1_R2.fastq.gz,treated
 drug_2,drug_2_R1.fastq.gz,drug_2_R2.fastq.gz,treated
 drug_3,drug_3_R1.fastq.gz,drug_3_R2.fastq.gz,treated`}</pre>
-        <pre class={`mt-4 ${code}`}>{`nextflow run naveenmotukuri1-ops/bioxflow-rnaseq -profile docker \\
+        <pre class={`mt-4 ${code}`}>{`nextflow run bioxflow/rnaseq -profile docker \\
     --input samplesheet.csv \\
     --fasta genome.fa.gz --gtf genes.gtf.gz \\
     --outdir results`}</pre>

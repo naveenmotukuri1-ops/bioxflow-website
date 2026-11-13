@@ -35,7 +35,7 @@ export const pipelines: Pipeline[] = [
     status: 'Released',
     engine: 'Nextflow',
     version: '1.0.0',
-    repo: 'https://github.com/naveenmotukuri1-ops/bioxflow-rnaseq',
+    repo: 'https://github.com/bioxflow/rnaseq',
     page: '/pipelines/rnaseq'
   },
   {
