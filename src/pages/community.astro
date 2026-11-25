@@ -676,7 +676,7 @@ const principles = [
 
         filterCount.textContent = filter === 'all'
           ? `Showing all ${visibleCount} contribution opportunities.`
-          : `Showing ${visibleCount} ${button.textContent.trim().toLowerCase()} opportunity.`;
+          : `Showing ${visibleCount} ${button.textContent.trim().toLowerCase()} ${visibleCount === 1 ? 'opportunity' : 'opportunities'}.`;
       });
     });
   </script>

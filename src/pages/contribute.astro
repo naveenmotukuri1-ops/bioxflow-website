@@ -265,6 +265,7 @@ const categories = [
         </div>
 
         <!-- INTERACTIVE FILTERS -->
+        <span id="pipelines" class="block scroll-mt-28"></span>
         <div class="mt-10 flex flex-wrap gap-3" id="category-filters">
           {categories.map((category) => (
             <button
@@ -621,12 +622,12 @@ const categories = [
       {
         title: 'Fork a repository',
         description: "Visit a GitHub repository and create a fork. This gives you your own copy where you can safely make changes without modifying the original project.",
-        command: "Fork the repository using GitHub's Fork button"
+        command: "# Fork the repository using GitHub's Fork button"
       },
       {
         title: 'Clone your fork',
         description: 'Download your fork to your computer so that you can work on the code locally.',
-        command: 'git clone https://github.com/YOUR-USERNAME/REPOSITORY.git\\ncd REPOSITORY'
+        command: 'git clone https://github.com/YOUR-USERNAME/REPOSITORY.git\ncd REPOSITORY'
       },
       {
         title: 'Create a branch',
@@ -636,12 +637,12 @@ const categories = [
       {
         title: 'Commit & push',
         description: 'Save your changes with a clear commit message and push the branch to your GitHub fork.',
-        command: 'git add .\\ngit commit -m "Improve workflow documentation"\\ngit push origin feature/my-improvement'
+        command: 'git add .\ngit commit -m "Improve workflow documentation"\ngit push origin feature/my-improvement'
       },
       {
         title: 'Open a pull request',
         description: 'Open GitHub and propose merging your branch into the original repository. Describe what changed and how you tested it.',
-        command: '# Open a Pull Request on GitHub\\n# Include a summary and testing details'
+        command: '# Open a Pull Request on GitHub\n# Include a summary and testing details'
       }
     ];
 

@@ -7,7 +7,8 @@ const links = [
   { href: '/contribute', label: 'Contribute' },
   { href: '/community', label: 'Community' },
   { href: '/research', label: 'Research' },
-  { href: '/about', label: 'About' }
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' }
 ];
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => path === href || path.startsWith(href + '/');
@@ -26,7 +27,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
     </div>
 
     <div class="flex items-center gap-2">
-      <a href="/pipelines#search" class="hidden items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-500 transition hover:border-flow hover:text-ink md:flex">
+      <a href="/pipelines#search" class="hidden items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-500 transition hover:border-flow hover:text-ink md:flex lg:hidden xl:flex">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         Search pipelines
       </a>
@@ -42,7 +43,6 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
           {links.map((l) => (
             <a href={l.href} class={`block rounded-md px-3 py-2 text-sm font-medium ${isActive(l.href) ? 'bg-flow-soft text-flow-dark' : 'text-slate-700 hover:bg-slate-100'}`}>{l.label}</a>
           ))}
-          <a href="/contact" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Contact</a>
         </div>
       </details>
     </div>

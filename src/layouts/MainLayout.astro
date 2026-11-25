@@ -12,6 +12,7 @@ const {
   title = 'Bioxflow | Bioinformatics and Computational Biology',
   description = 'An open community developing reproducible bioinformatics analysis pipelines.'
 } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -25,6 +26,9 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Bioxflow" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
     <title>{title}</title>
   </head>
   <body class="flex min-h-screen flex-col">
