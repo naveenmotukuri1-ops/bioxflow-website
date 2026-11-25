@@ -1,7 +1,7 @@
 
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { githubOrg } from '../data/site';
+import { contactEmail } from '../data/site';
 
 const enquiryTypes = [
   'General enquiry',
@@ -152,12 +152,11 @@ const enquiryTypes = [
               Send us a message
             </h2>
             <p class="mt-3 text-sm leading-6 text-slate-500">
-              Complete the details below and we will reply by email.
+              Complete the details below and your email app will open with the message ready to send.
             </p>
           </div>
 
           <form id="contact-form" class="space-y-6">
-            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <noscript><p class="text-sm text-red-700">Please enable JavaScript to send a message.</p></noscript>
 
             <div class="grid gap-6 md:grid-cols-2">
@@ -252,25 +251,25 @@ const enquiryTypes = [
             </div>
 
             <p class="text-xs leading-6 text-slate-500">
-              Your details are used only to reply to your enquiry. Messages are
-              delivered to us by
-              <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer" class="font-semibold text-teal-700 hover:underline">Web3Forms</a>.
+              Nothing is sent until you press send in your email app. You can also write to
+              <a href={`mailto:${contactEmail}`} class="font-semibold text-teal-700 hover:underline">{contactEmail}</a> directly.
             </p>
 
             <button
               type="submit"
               class="flex w-full items-center justify-center gap-3 rounded-xl bg-[#101c2c] px-6 py-4 font-semibold text-white transition hover:bg-teal-700 disabled:cursor-wait disabled:opacity-60"
             >
-              <span data-label>Send message</span>
+              <span data-label>Open in email app</span>
               <span aria-hidden="true">→</span>
             </button>
 
             <p id="form-status" role="status" aria-live="polite" class="text-sm leading-6 text-slate-600"></p>
 
-            <p id="form-fallback" hidden class="text-sm leading-6 text-slate-600">
-              For questions about a pipeline you can also open a public issue on
-              <a href={`${githubOrg}/rnaseq/issues/new`} target="_blank" rel="noopener noreferrer" class="font-semibold text-teal-700 hover:underline">GitHub</a>.
-            </p>
+            <div id="form-fallback" hidden class="flex flex-wrap gap-3 text-sm">
+              <a id="gmail-link" href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-slate-300 px-4 py-2.5 font-semibold text-[#101c2c] transition hover:border-teal-500">Open in Gmail</a>
+              <a id="outlook-link" href="https://outlook.live.com/" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-slate-300 px-4 py-2.5 font-semibold text-[#101c2c] transition hover:border-teal-500">Open in Outlook.com</a>
+              <button id="copy-message" type="button" class="rounded-lg border border-slate-300 px-4 py-2.5 font-semibold text-[#101c2c] transition hover:border-teal-500">Copy message</button>
+            </div>
 
           </form>
         </div>
@@ -310,30 +309,36 @@ const enquiryTypes = [
 </MainLayout>
 
 <script>
-  import { web3formsKey } from '../data/site';
+  import { contactEmail } from '../data/site';
 
   const form = document.querySelector<HTMLFormElement>('#contact-form')!;
   const status = document.querySelector<HTMLParagraphElement>('#form-status')!;
-  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-  const label = button.querySelector<HTMLSpanElement>('[data-label]')!;
   const fallback = document.querySelector<HTMLElement>('#form-fallback')!;
+  const gmail = document.querySelector<HTMLAnchorElement>('#gmail-link')!;
+  const outlook = document.querySelector<HTMLAnchorElement>('#outlook-link')!;
+  const copy = document.querySelector<HTMLButtonElement>('#copy-message')!;
 
-  function show(kind: 'ok' | 'error' | 'info', text: string) {
-    status.textContent = text;
-    status.className = 'text-sm leading-6 ' + { ok: 'text-emerald-700', error: 'text-red-700', info: 'text-slate-600' }[kind];
-  }
-
-  let sending = false;
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (sending) return;
-
+  function compose() {
     const data = new FormData(form);
     const value = (key: string) => String(data.get(key) ?? '').trim();
+    const subject = `[Bioxflow] ${value('subject')}`;
+    const body = [
+      `Name: ${value('name')}`,
+      `Email: ${value('email')}`,
+      `Organisation: ${value('organisation') || 'Not provided'}`,
+      `Enquiry type: ${value('enquiry')}`,
+      '',
+      value('message')
+    ].join('\r\n').replace(/\r?\n/g, '\r\n');
+    return { subject, body };
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
     for (const key of ['name', 'subject', 'message']) {
       const field = form.elements.namedItem(key) as HTMLInputElement;
-      if (!value(key)) {
+      if (!field.value.trim()) {
         field.setCustomValidity('Please fill in this field.');
         field.reportValidity();
         field.addEventListener('input', () => field.setCustomValidity(''), { once: true });
@@ -341,49 +346,25 @@ const enquiryTypes = [
       }
     }
 
-    if (!web3formsKey) {
-      show('error', 'The contact form is temporarily unavailable. Your message has not been sent.');
-      fallback.hidden = false;
-      return;
-    }
+    const { subject, body } = compose();
+    const to = encodeURIComponent(contactEmail);
+    const s = encodeURIComponent(subject);
+    const b = encodeURIComponent(body);
+    gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${s}&body=${b}`;
+    outlook.href = `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${s}&body=${b}`;
+    copy.textContent = 'Copy message';
+    status.textContent = 'Your email app should open with the message ready. Press send there to finish. If nothing opened, use one of these:';
+    fallback.hidden = false;
+    window.location.href = `mailto:${contactEmail}?subject=${s}&body=${b}`;
+  });
 
-    sending = true;
-    button.disabled = true;
-    label.textContent = 'Sending…';
-    show('info', 'Sending your message…');
-    fallback.hidden = true;
-
+  copy.addEventListener('click', async () => {
+    const { subject, body } = compose();
     try {
-      // Plain form data keeps this a simple cross-origin request (no CORS preflight).
-      const payload = new FormData();
-      payload.set('access_key', web3formsKey);
-      payload.set('from_name', 'Bioxflow website');
-      payload.set('subject', `[Bioxflow] ${value('subject')}`);
-      payload.set('name', value('name'));
-      payload.set('email', value('email'));
-      payload.set('organisation', value('organisation') || 'Not provided');
-      payload.set('enquiry_type', value('enquiry'));
-      payload.set('message', value('message'));
-      if (data.get('botcheck')) payload.set('botcheck', 'on');
-
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: payload,
-        signal: AbortSignal.timeout(20000)
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.success) throw new Error(result.message || `HTTP ${response.status}`);
-      form.reset();
-      show('ok', 'Thank you. Your message has been sent and we will reply by email.');
-    } catch (error) {
-      console.error('Contact form:', error);
-      show('error', 'Sorry, your message could not be sent. Your text is still here, so please try again in a moment.');
-      fallback.hidden = false;
-    } finally {
-      sending = false;
-      button.disabled = false;
-      label.textContent = 'Send message';
+      await navigator.clipboard.writeText(`To: ${contactEmail}\r\nSubject: ${subject}\r\n\r\n${body}`);
+      copy.textContent = 'Copied';
+    } catch {
+      status.textContent = `Copying was blocked by your browser. Please email ${contactEmail} directly.`;
     }
   });
 
